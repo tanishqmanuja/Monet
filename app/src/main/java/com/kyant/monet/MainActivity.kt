@@ -19,6 +19,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -45,7 +46,7 @@ fun Content() {
         val systemUiController = rememberSystemUiController()
         val monetParameters = LocalMonetParameters.current
 
-        var text by remember { mutableStateOf(TextFieldValue("ffffff")) }
+        var text by remember { mutableStateOf(TextFieldValue("")) }
         val color = Color("ff${text.text}".toLongOrNull(16) ?: 0xFFFFFFFF)
         var monetColors by remember { mutableStateOf(MonetColors()) }
         LaunchedEffect(text) {
@@ -66,12 +67,22 @@ fun Content() {
             lightColors(
                 primary = primaryColor,
                 secondary = secondaryColor,
-                background = backgroundColor
+                background = backgroundColor,
+                surface = Color.White,
+                onPrimary = if (MaterialTheme.colors.primary.luminance() <= 0.5f) Color.White else Color.Black,
+                onSecondary = if (MaterialTheme.colors.secondary.luminance() <= 0.5f) Color.White else Color.Black,
+                onBackground = if (MaterialTheme.colors.background.luminance() <= 0.5f) Color.White else Color.Black,
+                onSurface = Color.Black
             ),
             darkColors(
                 primary = primaryColor,
                 secondary = secondaryColor,
-                background = backgroundColor
+                background = backgroundColor,
+                surface = Color.White,
+                onPrimary = if (MaterialTheme.colors.primary.luminance() <= 0.5f) Color.White else Color.Black,
+                onSecondary = if (MaterialTheme.colors.secondary.luminance() <= 0.5f) Color.White else Color.Black,
+                onBackground = if (MaterialTheme.colors.background.luminance() <= 0.5f) Color.White else Color.Black,
+                onSurface = Color.Black
             )
         ) {
             Surface(

@@ -15,7 +15,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material.icons.outlined.Palette
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -53,7 +53,27 @@ fun Home(
             fontWeight = FontWeight.Medium,
             style = MaterialTheme.typography.h4
         )
-        ColorTextField(text, onValueChange)
+        Box {
+            ColorTextField(text, onValueChange)
+            Box(
+                Modifier
+                    .padding(start = 20.dp)
+                    .size(48.dp)
+                    .background(MaterialTheme.colors.primary, CircleShape)
+                    .align(Alignment.CenterStart)
+            )
+            Icon(
+                Icons.Outlined.Palette,
+                "Pick a color",
+                Modifier
+                    .padding(end = 20.dp)
+                    .clip(CircleShape)
+                    .clickable { }
+                    .background(MaterialTheme.colors.background)
+                    .padding(16.dp)
+                    .align(Alignment.CenterEnd)
+            )
+        }
         Spacer(Modifier.height(24.dp))
         ColorScheme(
             "Accent 1" to a1,
@@ -62,7 +82,6 @@ fun Home(
             "Neutral 1" to n1,
             "Neutral 2" to n2
         )
-        ButtonGroup()
     }
 }
 
@@ -75,7 +94,8 @@ fun ColorTextField(text: TextFieldValue, onValueChange: (TextFieldValue) -> Unit
         onValueChange,
         Modifier
             .fillMaxWidth()
-            .padding(16.dp, 32.dp),
+            .padding(16.dp, 32.dp)
+            .height(60.dp),
         textStyle = MaterialTheme.typography.h6.copy(textAlign = TextAlign.Center),
         label = {
             Text(
@@ -95,56 +115,11 @@ fun ColorTextField(text: TextFieldValue, onValueChange: (TextFieldValue) -> Unit
         shape = CircleShape,
         colors = TextFieldDefaults.textFieldColors(
             textColor = MaterialTheme.colors.primary,
-            backgroundColor = Color.White,
+            backgroundColor = MaterialTheme.colors.surface,
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent
         )
     )
-}
-
-@Composable
-fun ButtonGroup() {
-    Row(
-        Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Surface(
-            Modifier
-                .padding(32.dp)
-                .size(80.dp),
-            shape = CircleShape,
-            color = MaterialTheme.colors.secondary,
-            contentColor = if (MaterialTheme.colors.secondary.luminance() <= 0.5f) Color.White else Color.Black
-        ) {
-            Box(Modifier.fillMaxSize()) {
-                Icon(
-                    Icons.Outlined.Info,
-                    "Info",
-                    Modifier.align(Alignment.Center)
-                )
-            }
-        }
-        Surface(
-            Modifier.padding(32.dp),
-            shape = CircleShape,
-            color = MaterialTheme.colors.primary,
-            contentColor = if (MaterialTheme.colors.primary.luminance() <= 0.5f) Color.White else Color.Black
-        ) {
-            Box(
-                Modifier
-                    .height(80.dp)
-                    .padding(horizontal = 48.dp)
-            ) {
-                Text(
-                    "Customize",
-                    Modifier.align(Alignment.Center),
-                    fontWeight = FontWeight.Medium,
-                    style = MaterialTheme.typography.body1
-                )
-            }
-        }
-    }
 }
 
 @OptIn(ExperimentalAnimationApi::class)
