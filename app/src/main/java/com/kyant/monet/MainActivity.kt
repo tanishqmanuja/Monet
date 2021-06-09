@@ -24,6 +24,10 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.kyant.materialyou.component.BottomNavigationRail
+import com.kyant.monet.color.LocalMonetParameters
+import com.kyant.monet.color.MonetColors
+import com.kyant.monet.color.MonetParameters
+import com.kyant.monet.color.monetColors
 import com.kyant.monet.ui.screen.Home
 import com.kyant.monet.ui.screen.Settings
 import com.kyant.monet.ui.theme.MonetTheme

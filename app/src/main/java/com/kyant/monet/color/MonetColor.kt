@@ -1,4 +1,4 @@
-package com.kyant.monet
+package com.kyant.monet.color
 
 import androidx.compose.ui.graphics.Color
 import com.kyant.monet.colorscience.CAM16

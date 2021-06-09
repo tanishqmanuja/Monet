@@ -1,10 +1,10 @@
-package com.kyant.monet
+package com.kyant.monet.color
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
-import com.kyant.monet.MonetColor.Companion.toColor
-import com.kyant.monet.MonetColor.Companion.toRGB
+import com.kyant.monet.color.MonetColor.Companion.toColor
+import com.kyant.monet.color.MonetColor.Companion.toRGB
 import com.kyant.monet.colorscience.CAM16Parameters
 
 typealias MonetParameters = CAM16Parameters

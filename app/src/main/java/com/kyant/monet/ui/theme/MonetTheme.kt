@@ -17,8 +17,6 @@ fun MonetTheme(
     val colors = if (darkTheme) darkColors else lightkColors
     MaterialTheme(
         colors = colors,
-        typography = Typography,
-        shapes = Shapes,
         content = content
     )
 }
