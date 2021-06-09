@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -19,13 +19,14 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun BottomNavigationRail(
     items: Map<String, ImageVector>,
+    selectedItem: Int,
     modifier: Modifier = Modifier,
     backgroundColor: Color = MaterialTheme.colors.background,
     contentColor: Color = contentColorFor(backgroundColor),
     selectedColor: Color = MaterialTheme.colors.primary.copy(ContentAlpha.disabled),
-    elevation: Dp = BottomNavigationDefaults.Elevation
+    elevation: Dp = BottomNavigationDefaults.Elevation,
+    onClick: (Int) -> Unit
 ) {
-    var selectedItem by remember { mutableStateOf(0) }
     Card(
         Modifier.height(80.dp) then modifier,
         shape = RoundedCornerShape(0.dp),
@@ -45,7 +46,7 @@ fun BottomNavigationRail(
                         .width(128.dp)
                         .fillMaxHeight()
                         .clip(CircleShape)
-                        .clickable { selectedItem = i },
+                        .clickable { (onClick(i)) },
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {

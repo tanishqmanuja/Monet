@@ -55,6 +55,7 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout-compose:1.0.0-alpha07")
     implementation("androidx.core:core-ktx:1.7.0-SNAPSHOT")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0-SNAPSHOT")
+    implementation("androidx.navigation:navigation-compose:2.4.0-SNAPSHOT")
     implementation("com.google.accompanist:accompanist-coil:$accompanist")
     implementation("com.google.accompanist:accompanist-flowlayout:$accompanist")
     implementation("com.google.accompanist:accompanist-insets:$accompanist")
