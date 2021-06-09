@@ -44,10 +44,11 @@ class CAM16(xyz: XYZ, param: CAM16Parameters = CAM16Parameters.Default) {
     override fun toString(): String = "CAM16(J=$j, C=$c, h=$h, Q=$q, M=$m, s=$s)"
 
     companion object {
-        fun fromRGB(rgb: RGB): CAM16 =
-            CAM16(rgb.toXYZ(CAM16Parameters.Default), CAM16Parameters.Default)
+        fun fromRGB(rgb: RGB, param: CAM16Parameters = CAM16Parameters.Default): CAM16 =
+            CAM16(rgb.toXYZ(param), param)
 
-        fun fromColor(color: Color): CAM16 = fromRGB(color.toRGB())
+        fun fromColor(color: Color, param: CAM16Parameters = CAM16Parameters.Default): CAM16 =
+            fromRGB(color.toRGB(), param)
 
         val M_COEFFICIENTS = matrix3Of(
             2.0, 1.0, 1.0 / 20.0,
