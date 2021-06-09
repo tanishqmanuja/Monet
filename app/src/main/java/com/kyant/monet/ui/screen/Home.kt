@@ -2,7 +2,6 @@ package com.kyant.monet.ui.screen
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -15,6 +14,8 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.KeyboardArrowDown
+import androidx.compose.material.icons.outlined.KeyboardArrowUp
 import androidx.compose.material.icons.outlined.Palette
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -125,21 +126,19 @@ fun ColorTextField(text: TextFieldValue, onValueChange: (TextFieldValue) -> Unit
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun ColorScheme(vararg shades: Pair<String, List<Color>>) {
-    val activatedList = remember { mutableStateListOf<Boolean>() }
+    val expandedItems = remember { mutableStateListOf<Boolean>() }
     shades.forEachIndexed { i, (name, shade) ->
-        if (activatedList.getOrNull(i) == null) {
-            activatedList += false
+        if (expandedItems.getOrNull(i) == null) {
+            expandedItems += false
         }
-        var activated by remember { mutableStateOf(false) }
-        LaunchedEffect(activatedList[i]) {
-            activated = activatedList[i]
+        var expanded by remember { mutableStateOf(false) }
+        LaunchedEffect(expandedItems[i]) {
+            expanded = expandedItems[i]
         }
-        val previousActivated = activatedList.getOrElse(i - 1) { false }
-        val nextActivated = activatedList.getOrElse(i + 1) { false }
+        val previousActivated = expandedItems.getOrElse(i - 1) { false }
+        val nextActivated = expandedItems.getOrElse(i + 1) { false }
 
-        val verticalPadding = animateDpAsState(if (activated) 8.dp else 0.dp).value
-
-        val cornerSize = animateDpAsState(if (activated) 40.dp else 0.dp).value
+        val cornerSize = animateDpAsState(if (expanded) 40.dp else 4.dp).value
         val topCornerSize = animateDpAsState(
             when {
                 previousActivated -> 40.dp
@@ -157,59 +156,63 @@ fun ColorScheme(vararg shades: Pair<String, List<Color>>) {
             }
         ).value
 
-        Card(
-            when (i) {
-                0 -> Modifier.padding(16.dp, 0.dp, 16.dp, verticalPadding)
-                shades.lastIndex -> Modifier.padding(16.dp, verticalPadding, 16.dp, 0.dp)
-                else -> Modifier.padding(16.dp, verticalPadding)
-            },
-            shape = RoundedCornerShape(
-                topCornerSize,
-                topCornerSize,
-                bottomCornerSize,
-                bottomCornerSize
-            ),
-            backgroundColor = Color.White,
-            elevation = 0.dp
-        ) {
-            Column {
-                Box(
-                    Modifier
-                        .height(80.dp)
-                        .clickable { activatedList[i] = !activated }
-                ) {
-                    Text(
-                        name,
+        Column {
+            Card(
+                Modifier.padding(horizontal = 16.dp),
+                shape = RoundedCornerShape(
+                    topCornerSize,
+                    topCornerSize,
+                    bottomCornerSize,
+                    bottomCornerSize
+                ),
+                backgroundColor = Color.White,
+                elevation = 0.dp
+            ) {
+                Column {
+                    Row(
                         Modifier
                             .fillMaxWidth()
-                            .align(Alignment.Center),
-                        color = Color.Black,
-                        fontWeight = FontWeight.Medium,
-                        textAlign = TextAlign.Center,
-                        style = MaterialTheme.typography.h5
-                    )
-                }
-                Divider(
-                    color = animateColorAsState(
-                        if (if (activated) true else if (i != shades.lastIndex) !nextActivated else false)
-                            MaterialTheme.colors.onSurface.copy(0.12f)
-                        else Color.Transparent
-                    ).value
-                )
-                AnimatedVisibility(visible = activated) {
-                    FlowRow(
-                        Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 32.dp),
-                        mainAxisAlignment = MainAxisAlignment.Center
+                            .height(80.dp)
+                            .clickable { expandedItems[i] = !expanded }
+                            .padding(horizontal = 40.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
-                        ColorButton("0")
-                        shade.forEachIndexed { i, color ->
-                            ColorButton((if (i == 0) 50 else i * 100).toString(), color)
+                        Text(
+                            name,
+                            color = Color.Black,
+                            fontWeight = FontWeight.Medium,
+                            style = MaterialTheme.typography.h6
+                        )
+                        Icon(
+                            if (expanded) Icons.Outlined.KeyboardArrowUp else Icons.Outlined.KeyboardArrowDown,
+                            if (expanded) "Collapse" else "Expand"
+                        )
+                    }
+                    AnimatedVisibility(visible = expanded) {
+                        Divider()
+                        FlowRow(
+                            Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 32.dp),
+                            mainAxisAlignment = MainAxisAlignment.Center
+                        ) {
+                            ColorButton("0")
+                            shade.forEachIndexed { i, color ->
+                                ColorButton((if (i == 0) 50 else i * 100).toString(), color)
+                            }
                         }
                     }
                 }
             }
+        }
+        if (i != shades.lastIndex) {
+            Spacer(
+                Modifier
+                    .fillMaxWidth()
+                    .height(2.dp)
+                    .background(MaterialTheme.colors.background)
+            )
         }
     }
 }

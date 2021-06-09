@@ -36,8 +36,7 @@ fun BottomNavigationRail(
     ) {
         Row(
             Modifier.fillMaxSize(),
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
+            horizontalArrangement = Arrangement.Center
         ) {
             items.entries.forEachIndexed { i, (label, icon) ->
                 val selected = i == selectedItem
