@@ -2,13 +2,15 @@ package com.kyant.materialyou.component
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.Dp
@@ -24,39 +26,50 @@ fun BottomNavigationRail(
     elevation: Dp = BottomNavigationDefaults.Elevation
 ) {
     var selectedItem by remember { mutableStateOf(0) }
-    BottomNavigation(
+    Card(
         Modifier.height(80.dp) then modifier,
-        backgroundColor,
-        contentColor,
-        elevation
+        shape = RoundedCornerShape(0.dp),
+        backgroundColor = backgroundColor,
+        contentColor = contentColor,
+        elevation = elevation
     ) {
-        items.entries.forEachIndexed { i, (label, icon) ->
-            val selected = i == selectedItem
-            BottomNavigationItem(
-                selected,
-                onClick = { selectedItem = i },
-                icon = {
+        Row(
+            Modifier.fillMaxSize(),
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            items.entries.forEachIndexed { i, (label, icon) ->
+                val selected = i == selectedItem
+                Column(
+                    Modifier
+                        .width(128.dp)
+                        .fillMaxHeight()
+                        .clip(CircleShape)
+                        .clickable { selectedItem = i },
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Spacer(Modifier.height(8.dp))
                     Icon(
                         icon,
                         label,
                         Modifier
-                            .padding(bottom = 8.dp)
                             .background(
                                 if (selected) selectedColor else Color.Transparent,
                                 CircleShape
                             )
-                            .padding(animateDpAsState(if (selected) 16.dp else 4.dp).value, 4.dp)
-                            .height(24.dp)
+                            .padding(
+                                animateDpAsState(if (selected) 16.dp else 4.dp).value,
+                                4.dp
+                            )
                     )
-                },
-                modifier = Modifier.align(Alignment.CenterVertically),
-                label = {
+                    Spacer(Modifier.height(8.dp))
                     Text(
                         label,
                         style = MaterialTheme.typography.subtitle2
                     )
                 }
-            )
+            }
         }
     }
 }
