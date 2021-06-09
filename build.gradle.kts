@@ -15,6 +15,7 @@ allprojects {
         mavenCentral()
         maven("https://androidx.dev/snapshots/builds/7440113/artifacts/repository")
         maven("https://oss.sonatype.org/content/repositories/snapshots")
+        maven("https://jitpack.io")
     }
 }
 

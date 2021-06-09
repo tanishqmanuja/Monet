@@ -35,7 +35,7 @@ import com.kyant.materialyou.component.StretchScrollableColumn
 import com.kyant.monet.color.MonetColors
 
 @Composable
-fun Home(
+fun Palette(
     text: TextFieldValue,
     monetColors: MonetColors,
     onValueChange: (TextFieldValue) -> Unit
@@ -147,49 +147,47 @@ fun ColorScheme(vararg shades: Pair<String, List<Color>>) {
             }
         ).value
 
-        Column {
-            Card(
-                Modifier.padding(horizontal = 16.dp),
-                shape = RoundedCornerShape(
-                    topCornerSize,
-                    topCornerSize,
-                    bottomCornerSize,
-                    bottomCornerSize
-                ),
-                backgroundColor = Color.White,
-                elevation = 0.dp
-            ) {
-                Column {
-                    Row(
+        Card(
+            Modifier.padding(horizontal = 16.dp),
+            shape = RoundedCornerShape(
+                topCornerSize,
+                topCornerSize,
+                bottomCornerSize,
+                bottomCornerSize
+            ),
+            backgroundColor = Color.White,
+            elevation = 0.dp
+        ) {
+            Column {
+                Row(
+                    Modifier
+                        .fillMaxWidth()
+                        .height(80.dp)
+                        .clickable { expandedItems[i] = !expanded }
+                        .padding(horizontal = 40.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        name,
+                        style = MaterialTheme.typography.h6
+                    )
+                    Icon(
+                        if (expanded) Icons.Outlined.KeyboardArrowUp else Icons.Outlined.KeyboardArrowDown,
+                        if (expanded) "Collapse" else "Expand"
+                    )
+                }
+                AnimatedVisibility(visible = expanded) {
+                    Divider()
+                    FlowRow(
                         Modifier
                             .fillMaxWidth()
-                            .height(80.dp)
-                            .clickable { expandedItems[i] = !expanded }
-                            .padding(horizontal = 40.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
+                            .padding(vertical = 32.dp),
+                        mainAxisAlignment = MainAxisAlignment.Center
                     ) {
-                        Text(
-                            name,
-                            style = MaterialTheme.typography.h6
-                        )
-                        Icon(
-                            if (expanded) Icons.Outlined.KeyboardArrowUp else Icons.Outlined.KeyboardArrowDown,
-                            if (expanded) "Collapse" else "Expand"
-                        )
-                    }
-                    AnimatedVisibility(visible = expanded) {
-                        Divider()
-                        FlowRow(
-                            Modifier
-                                .fillMaxWidth()
-                                .padding(vertical = 32.dp),
-                            mainAxisAlignment = MainAxisAlignment.Center
-                        ) {
-                            ColorButton("0")
-                            shade.forEachIndexed { i, color ->
-                                ColorButton((if (i == 0) 50 else i * 100).toString(), color)
-                            }
+                        ColorButton(text = "0")
+                        shade.forEachIndexed { i, color ->
+                            ColorButton(color, (if (i == 0) 50 else i * 100).toString())
                         }
                     }
                 }
@@ -207,10 +205,7 @@ fun ColorScheme(vararg shades: Pair<String, List<Color>>) {
 }
 
 @Composable
-fun ColorButton(
-    text: String,
-    color: Color = Color.White
-) {
+fun ColorButton(color: Color = Color.White, text: String = "") {
     Box(
         Modifier
             .padding(4.dp)

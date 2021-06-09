@@ -31,6 +31,7 @@ android {
     kotlinOptions {
         jvmTarget = "11"
         freeCompilerArgs = listOf(
+            "-Xopt-in=kotlin.RequiresOptIn",
             "-P",
             "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true"
         )
@@ -56,6 +57,8 @@ dependencies {
     implementation("androidx.core:core-ktx:1.7.0-SNAPSHOT")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0-SNAPSHOT")
     implementation("androidx.navigation:navigation-compose:2.4.0-SNAPSHOT")
+    implementation("com.github.dhaval2404:imagepicker:2.1")
+    implementation("com.github.haifengl:smile-kotlin:2.6.0")
     implementation("com.google.accompanist:accompanist-coil:$accompanist")
     implementation("com.google.accompanist:accompanist-flowlayout:$accompanist")
     implementation("com.google.accompanist:accompanist-insets:$accompanist")
