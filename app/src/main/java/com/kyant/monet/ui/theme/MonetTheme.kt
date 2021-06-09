@@ -7,6 +7,7 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import com.google.accompanist.insets.ProvideWindowInsets
 import com.kyant.monet.R
 
 @Composable
@@ -39,6 +40,10 @@ fun MonetTheme(
     MaterialTheme(
         colors = colors,
         typography = typography,
-        content = content
+        content = {
+            ProvideWindowInsets {
+                content()
+            }
+        }
     )
 }

@@ -23,6 +23,7 @@ fun StretchScrollableColumn(
         AndroidView(
             {
                 ScrollView(it).apply {
+                    isVerticalScrollBarEnabled = false
                     addView(ComposeView(it).apply {
                         setContent {
                             Column(modifier, verticalArrangement, horizontalAlignment, content)
@@ -33,7 +34,7 @@ fun StretchScrollableColumn(
         )
     } else {
         Column(
-            Modifier.verticalScroll(rememberScrollState()) then modifier,
+            modifier.verticalScroll(rememberScrollState()),
             verticalArrangement, horizontalAlignment, content
         )
     }
@@ -50,6 +51,7 @@ fun StretchScrollableRow(
         AndroidView(
             {
                 ScrollView(it).apply {
+                    isHorizontalScrollBarEnabled = false
                     addView(ComposeView(it).apply {
                         setContent {
                             Row(modifier, horizontalArrangement, verticalAlignment, content)
@@ -60,7 +62,7 @@ fun StretchScrollableRow(
         )
     } else {
         Row(
-            Modifier.horizontalScroll(rememberScrollState()) then modifier,
+            modifier.horizontalScroll(rememberScrollState()),
             horizontalArrangement, verticalAlignment, content
         )
     }

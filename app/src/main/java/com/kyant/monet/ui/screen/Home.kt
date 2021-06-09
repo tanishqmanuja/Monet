@@ -22,7 +22,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.luminance
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -52,13 +51,6 @@ fun Home(
         )
         Box {
             ColorTextField(text, onValueChange)
-            Box(
-                Modifier
-                    .padding(start = 20.dp)
-                    .size(48.dp)
-                    .background(MaterialTheme.colors.primary, CircleShape)
-                    .align(Alignment.CenterStart)
-            )
             Icon(
                 Icons.Outlined.Palette,
                 "Pick a color",
@@ -66,9 +58,10 @@ fun Home(
                     .padding(end = 20.dp)
                     .clip(CircleShape)
                     .clickable { }
-                    .background(MaterialTheme.colors.background)
+                    .background(MaterialTheme.colors.primary)
                     .padding(16.dp)
-                    .align(Alignment.CenterEnd)
+                    .align(Alignment.CenterEnd),
+                tint = MaterialTheme.colors.onPrimary
             )
         }
         Spacer(Modifier.height(24.dp))
@@ -79,6 +72,7 @@ fun Home(
             "Neutral 1" to n1,
             "Neutral 2" to n2
         )
+        Spacer(Modifier.height(24.dp))
     }
 }
 
@@ -125,7 +119,7 @@ fun ColorScheme(vararg shades: Pair<String, List<Color>>) {
     val expandedItems = remember { mutableStateListOf<Boolean>() }
     shades.forEachIndexed { i, (name, shade) ->
         if (expandedItems.getOrNull(i) == null) {
-            expandedItems += false
+            expandedItems += i == 0
         }
         var expanded by remember { mutableStateOf(false) }
         LaunchedEffect(expandedItems[i]) {

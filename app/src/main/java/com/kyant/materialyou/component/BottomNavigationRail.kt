@@ -28,7 +28,7 @@ fun BottomNavigationRail(
     onClick: (Int) -> Unit
 ) {
     Card(
-        Modifier.height(80.dp) then modifier,
+        modifier.height(80.dp),
         shape = RoundedCornerShape(0.dp),
         backgroundColor = backgroundColor,
         contentColor = contentColor,
