@@ -19,7 +19,9 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -38,6 +40,7 @@ import androidx.compose.ui.unit.dp
 import com.google.accompanist.flowlayout.FlowRow
 import com.google.accompanist.flowlayout.MainAxisAlignment
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.kyant.materialyou.component.BottomNavigationRail
 import com.kyant.monet.ui.theme.MonetTheme
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -74,29 +77,54 @@ fun Content() {
             systemUiController.setSystemBarsColor(backgroundColor)
         }
 
-        MonetTheme(primary = primaryColor, secondary = secondaryColor) {
+        MonetTheme(
+            lightColors(
+                primary = primaryColor,
+                secondary = secondaryColor,
+                background = backgroundColor
+            ),
+            darkColors(
+                primary = primaryColor,
+                secondary = secondaryColor,
+                background = backgroundColor
+            )
+        ) {
             Surface(
                 Modifier.fillMaxSize(),
                 color = backgroundColor
             ) {
-                Column(Modifier.verticalScroll(rememberScrollState())) {
-                    Spacer(Modifier.height(56.dp))
-                    Text(
-                        "Monet Color",
-                        Modifier.padding(horizontal = 24.dp),
-                        fontWeight = FontWeight.Medium,
-                        style = MaterialTheme.typography.h4
+                Box {
+                    Column(
+                        Modifier
+                            .padding(bottom = 80.dp)
+                            .verticalScroll(rememberScrollState())
+                    ) {
+                        Spacer(Modifier.height(56.dp))
+                        Text(
+                            "Monet Color",
+                            Modifier.padding(horizontal = 24.dp),
+                            fontWeight = FontWeight.Medium,
+                            style = MaterialTheme.typography.h4
+                        )
+                        ColorTextField(text) { text = it }
+                        Spacer(Modifier.height(24.dp))
+                        ColorScheme(
+                            "Accent 1" to a1,
+                            "Accent 2" to a2,
+                            "Accent 3" to a3,
+                            "Neutral 1" to n1,
+                            "Neutral 2" to n2
+                        )
+                        ButtonGroup()
+                    }
+                    BottomNavigationRail(
+                        mapOf(
+                            "Home" to Icons.Outlined.Home,
+                            "Settings" to Icons.Outlined.Settings
+                        ),
+                        Modifier.align(Alignment.BottomCenter),
+                        selectedColor = a1.getOrElse(0) { MaterialTheme.colors.background }
                     )
-                    ColorTextField(text) { text = it }
-                    Spacer(Modifier.height(24.dp))
-                    ColorScheme(
-                        "Accent 1" to a1,
-                        "Accent 2" to a2,
-                        "Accent 3" to a3,
-                        "Neutral 1" to n1,
-                        "Neutral 2" to n2
-                    )
-                    ButtonGroup()
                 }
             }
         }
