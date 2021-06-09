@@ -20,22 +20,17 @@ fun MonetTheme(
     val typography = Typography(
         defaultFontFamily = FontFamily(
             Font(
-                resId = R.font.android_euclid_medium,
+                resId = R.font.google_sans_text_regular,
                 weight = FontWeight.Normal,
                 style = FontStyle.Normal
             ),
             Font(
-                resId = R.font.android_euclid_medium,
+                resId = R.font.google_sans_text_medium,
                 weight = FontWeight.Medium,
                 style = FontStyle.Normal
             ),
             Font(
-                resId = R.font.android_euclid_semibold,
-                weight = FontWeight.SemiBold,
-                style = FontStyle.Normal
-            ),
-            Font(
-                resId = R.font.android_euclid_semibold,
+                resId = R.font.google_sans_text_bold,
                 weight = FontWeight.Bold,
                 style = FontStyle.Normal
             )
