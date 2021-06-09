@@ -75,23 +75,22 @@ fun Generator(onPickButtonClick: () -> Unit) {
             }
         }
 
-        MainActivityDataModel.imageUri.value?.let {
-            AnimatedContent(it) {
+        MainActivityDataModel.imageUri.value?.let { uri ->
+            AnimatedContent(uri) {
                 Image(
                     rememberCoilPainter(it), null,
                     Modifier
-                        .padding(16.dp)
+                        .padding(32.dp)
                         .size(128.dp)
                 )
             }
 
-            var centroids by remember { mutableStateOf<List<Color>>(emptyList()) }
-            LaunchedEffect(it) {
+            LaunchedEffect(uri) {
                 withContext(Dispatchers.IO) {
                     val colors = mutableListOf<Color>()
                     val loader = ImageLoader(context)
                     val request = ImageRequest.Builder(context)
-                        .data(it)
+                        .data(uri)
                         .allowHardware(false)
                         .build()
                     val result = (loader.execute(request) as SuccessResult).drawable
@@ -102,7 +101,7 @@ fun Generator(onPickButtonClick: () -> Unit) {
                             colors.add(Color(scaledBitmap[i, j]))
                         }
                     }
-                    centroids = colors.findCentroids(8)
+                    MainActivityDataModel.centroids = colors.findCentroids(8)
                 }
             }
             FlowRow(
@@ -111,12 +110,13 @@ fun Generator(onPickButtonClick: () -> Unit) {
                     .padding(vertical = 32.dp),
                 mainAxisAlignment = MainAxisAlignment.Center
             ) {
-                centroids.forEach {
-                    AnimatedContent(it) {
+                MainActivityDataModel.centroids.forEach { color ->
+                    AnimatedContent(color) {
                         ColorButton(it)
                     }
                 }
             }
         }
+        Spacer(Modifier.height(24.dp))
     }
 }

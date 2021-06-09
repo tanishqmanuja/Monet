@@ -11,4 +11,8 @@ data class CAM16Parameters(
     val m16Inv: Matrix3 = CAT16.M16.inverse(),
     val viewingConditions: ViewingConditions = ViewingConditions(),
     val coefficients: CAM16.Companion.CAM16Coefficients = CAM16.coefficients(viewingConditions)
-)
+) {
+    companion object {
+        val Default = CAM16Parameters()
+    }
+}

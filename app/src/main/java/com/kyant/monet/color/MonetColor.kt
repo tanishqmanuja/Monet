@@ -12,7 +12,7 @@ import com.kyant.monet.colorscience.XYZ
 import com.kyant.monet.math.Matrix3x1
 import com.kyant.monet.math.matrix3x1Of
 
-class MonetColor(rgb: RGB, param: CAM16Parameters) {
+class MonetColor(rgb: RGB, param: CAM16Parameters = CAM16Parameters.Default) {
     private val colorScheme = colorSchemeOf(rgb.toXYZ(param), param)
     val accent1 = colorScheme[0]
     val accent2 = colorScheme[1]
@@ -46,7 +46,7 @@ class MonetColor(rgb: RGB, param: CAM16Parameters) {
         private fun shadesOf(
             h: Double,
             C: Double,
-            param: CAM16Parameters
+            param: CAM16Parameters = CAM16Parameters.Default
         ): Array<Matrix3x1> = arrayOf(
             gamutMap(95.0.toY(), C, h, param),
             gamutMap(90.0.toY(), C, h, param),
@@ -63,7 +63,7 @@ class MonetColor(rgb: RGB, param: CAM16Parameters) {
 
         private fun colorSchemeOf(
             xyz: XYZ,
-            param: CAM16Parameters
+            param: CAM16Parameters = CAM16Parameters.Default
         ): List<List<RGB>> {
             val cam16color = CAM16(xyz, param)
             val y = xyz[1]

@@ -1,12 +1,15 @@
 package com.kyant.monet.colorscience
 
+import androidx.compose.ui.graphics.Color
+import com.kyant.monet.color.MonetColor.Companion.toRGB
 import com.kyant.monet.colorscience.CAT16.cat16
 import com.kyant.monet.colorscience.CAT16.inverseCat16
+import com.kyant.monet.colorscience.SRGB.toXYZ
 import com.kyant.monet.math.*
 import kotlin.math.*
 import kotlin.properties.Delegates
 
-class CAM16(xyz: XYZ, param: CAM16Parameters) {
+class CAM16(xyz: XYZ, param: CAM16Parameters = CAM16Parameters.Default) {
     private val ma = cat16(xyz, param)
     private val mCo = M_COEFFICIENTS * ma
     private val ac = mCo[0]
@@ -14,12 +17,12 @@ class CAM16(xyz: XYZ, param: CAM16Parameters) {
     private val b = mCo[2]
     private val p = ma[0] + ma[1] + 21.0 / 20.0 * ma[2]
 
-    private var j by Delegates.notNull<Double>()
-    private var q by Delegates.notNull<Double>()
+    var j by Delegates.notNull<Double>()
+    var q by Delegates.notNull<Double>()
     var h = 0.0
     var c = 0.0
-    private var m = 0.0
-    private var s = 0.0
+    var m = 0.0
+    var s = 0.0
 
     init {
         with(param.coefficients) {
@@ -41,6 +44,11 @@ class CAM16(xyz: XYZ, param: CAM16Parameters) {
     override fun toString(): String = "CAM16(J=$j, C=$c, h=$h, Q=$q, M=$m, s=$s)"
 
     companion object {
+        fun fromRGB(rgb: RGB): CAM16 =
+            CAM16(rgb.toXYZ(CAM16Parameters.Default), CAM16Parameters.Default)
+
+        fun fromColor(color: Color): CAM16 = fromRGB(color.toRGB())
+
         val M_COEFFICIENTS = matrix3Of(
             2.0, 1.0, 1.0 / 20.0,
             1.0, -12.0 / 11.0, 1.0 / 11.0,

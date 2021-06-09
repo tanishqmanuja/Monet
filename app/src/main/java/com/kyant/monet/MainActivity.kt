@@ -32,9 +32,9 @@ import androidx.compose.ui.unit.dp
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.kyant.materialyou.component.BottomNavigationRail
+import com.kyant.monet.color.DefaultMonetParameters
 import com.kyant.monet.color.LocalMonetParameters
 import com.kyant.monet.color.MonetColors
-import com.kyant.monet.color.MonetParameters
 import com.kyant.monet.color.monetColors
 import com.kyant.monet.ui.screen.Generator
 import com.kyant.monet.ui.screen.Palette
@@ -47,6 +47,7 @@ import kotlinx.coroutines.withContext
 
 object MainActivityDataModel {
     val imageUri: MutableState<Uri?> = mutableStateOf(null)
+    var centroids by mutableStateOf<List<Color>>(emptyList())
 }
 
 class MainActivity : ComponentActivity() {
@@ -71,7 +72,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Content(startForImageResult: ActivityResultLauncher<Intent>) {
     val context = LocalContext.current as MainActivity
-    CompositionLocalProvider(LocalMonetParameters provides MonetParameters()) {
+    CompositionLocalProvider(LocalMonetParameters provides DefaultMonetParameters) {
         val systemUiController = rememberSystemUiController()
         val monetParameters = LocalMonetParameters.current
 

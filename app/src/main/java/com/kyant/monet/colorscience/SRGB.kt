@@ -51,9 +51,9 @@ object SRGB {
         ALPHA * (t).pow(1.0 / GAMMA) - A
     }
 
-    fun RGB.toXYZ(param: CAM16Parameters): XYZ =
+    fun RGB.toXYZ(param: CAM16Parameters = CAM16Parameters.Default): XYZ =
         param.mRGB * map { linearized(it) }.toDoubleArray()
 
-    fun XYZ.tosRGB(param: CAM16Parameters): RGB =
+    fun XYZ.tosRGB(param: CAM16Parameters = CAM16Parameters.Default): RGB =
         (param.mRGBInv * this).map { delinearized(it) }.toDoubleArray()
 }

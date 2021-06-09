@@ -1,6 +1,7 @@
 package com.kyant.monet.color
 
 import androidx.compose.ui.graphics.Color
+import com.kyant.monet.colorscience.CAM16
 import smile.clustering.kmeans
 
 fun List<Color>.findCentroids(k: Int): List<Color> = kmeans(map {
@@ -11,4 +12,4 @@ fun List<Color>.findCentroids(k: Int): List<Color> = kmeans(map {
         (0xFF * it[1]).toInt().coerceIn(0..255),
         (0xFF * it[2]).toInt().coerceIn(0..255)
     )
-}
+}.sortedBy { CAM16.fromColor(it).s }

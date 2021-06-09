@@ -9,7 +9,9 @@ import com.kyant.monet.colorscience.CAM16Parameters
 
 typealias MonetParameters = CAM16Parameters
 
-val LocalMonetParameters = staticCompositionLocalOf { MonetParameters() }
+val DefaultMonetParameters = CAM16Parameters.Default
+
+val LocalMonetParameters = staticCompositionLocalOf { DefaultMonetParameters }
 
 data class MonetColors(
     val accent1: List<Color> = emptyList(),
@@ -19,7 +21,10 @@ data class MonetColors(
     val neutral2: List<Color> = emptyList()
 )
 
-fun monetColors(color: Color, monetParameters: MonetParameters): MonetColors {
+fun monetColors(
+    color: Color,
+    monetParameters: MonetParameters = DefaultMonetParameters
+): MonetColors {
     val (a1, a2, a3, n1, n2) = MonetColor(color.toRGB(), monetParameters)
     return MonetColors(
         a1.map { it.toColor() },

@@ -34,7 +34,7 @@ object CAT16 {
         return arrayOf(wD, wa)
     }
 
-    fun cat16(xyz: XYZ, param: CAM16Parameters): Matrix3x1 {
+    fun cat16(xyz: XYZ, param: CAM16Parameters = CAM16Parameters.Default): Matrix3x1 {
         val mRGB = M16 * xyz
         val ma = zeroMatrix3x1Of()
         with(param.viewingConditions) {
@@ -45,7 +45,7 @@ object CAT16 {
         }
     }
 
-    fun inverseCat16(ma: Matrix3x1, param: CAM16Parameters): XYZ {
+    fun inverseCat16(ma: Matrix3x1, param: CAM16Parameters = CAM16Parameters.Default): XYZ {
         val rgb = zeroMatrix3x1Of()
         with(param.viewingConditions) {
             for (i in 0 until 3) {
