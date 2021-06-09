@@ -138,20 +138,21 @@ fun ColorScheme(vararg shades: Pair<String, List<Color>>) {
         val previousActivated = expandedItems.getOrElse(i - 1) { false }
         val nextActivated = expandedItems.getOrElse(i + 1) { false }
 
-        val cornerSize = animateDpAsState(if (expanded) 40.dp else 4.dp).value
+        val roundedCornerSize = 28.dp
+        val cornerSize = animateDpAsState(if (expanded) roundedCornerSize else 4.dp).value
         val topCornerSize = animateDpAsState(
             when {
-                previousActivated -> 40.dp
-                i == 0 -> 40.dp
+                previousActivated -> roundedCornerSize
+                i == 0 -> roundedCornerSize
                 i == shades.lastIndex -> cornerSize
                 else -> cornerSize
             }
         ).value
         val bottomCornerSize = animateDpAsState(
             when {
-                nextActivated -> 40.dp
+                nextActivated -> roundedCornerSize
                 i == 0 -> cornerSize
-                i == shades.lastIndex -> 40.dp
+                i == shades.lastIndex -> roundedCornerSize
                 else -> cornerSize
             }
         ).value
@@ -180,8 +181,6 @@ fun ColorScheme(vararg shades: Pair<String, List<Color>>) {
                     ) {
                         Text(
                             name,
-                            color = Color.Black,
-                            fontWeight = FontWeight.Medium,
                             style = MaterialTheme.typography.h6
                         )
                         Icon(
