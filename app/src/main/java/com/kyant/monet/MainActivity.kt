@@ -32,8 +32,6 @@ import androidx.compose.ui.unit.dp
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.kyant.materialyou.component.BottomNavigationRail
-import com.kyant.monet.color.DefaultMonetParameters
-import com.kyant.monet.color.LocalMonetParameters
 import com.kyant.monet.color.MonetColors
 import com.kyant.monet.color.monetColors
 import com.kyant.monet.ui.screen.Generator
@@ -72,86 +70,83 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Content(startForImageResult: ActivityResultLauncher<Intent>) {
     val context = LocalContext.current as MainActivity
-    CompositionLocalProvider(LocalMonetParameters provides DefaultMonetParameters) {
-        val systemUiController = rememberSystemUiController()
-        val monetParameters = LocalMonetParameters.current
+    val systemUiController = rememberSystemUiController()
 
-        var text by remember { mutableStateOf(TextFieldValue("")) }
-        val color = Color("ff${text.text}".toLongOrNull(16) ?: 0xFFFFFFFF)
-        var monetColors by remember { mutableStateOf(MonetColors()) }
-        LaunchedEffect(text) {
-            withContext(Dispatchers.IO) {
-                monetColors = monetColors(color, monetParameters)
-            }
+    var text by remember { mutableStateOf(TextFieldValue("")) }
+    val color = Color("ff${text.text}".toLongOrNull(16) ?: 0xFFFFFFFF)
+    var monetColors by remember { mutableStateOf(MonetColors()) }
+    LaunchedEffect(text) {
+        withContext(Dispatchers.IO) {
+            monetColors = monetColors(color)
         }
+    }
 
-        val (a1, a2, a3, n1, n2) = monetColors
-        val primaryColor = a1.getOrElse(5) { MaterialTheme.colors.primary }
-        val secondaryColor = a3.getOrElse(4) { MaterialTheme.colors.primary }
-        val backgroundColor = n2.getOrElse(1) { MaterialTheme.colors.background }
-        val surfaceColor = n2.getOrElse(0) { MaterialTheme.colors.surface }
-        SideEffect {
-            systemUiController.setSystemBarsColor(backgroundColor)
-        }
+    val (a1, a2, a3, n1, n2) = monetColors
+    val primaryColor = a1.getOrElse(5) { MaterialTheme.colors.primary }
+    val secondaryColor = a3.getOrElse(4) { MaterialTheme.colors.primary }
+    val backgroundColor = n2.getOrElse(1) { MaterialTheme.colors.background }
+    val surfaceColor = n2.getOrElse(0) { MaterialTheme.colors.surface }
+    SideEffect {
+        systemUiController.setSystemBarsColor(backgroundColor)
+    }
 
-        MonetTheme(
-            lightColors(
-                primary = primaryColor,
-                secondary = secondaryColor,
-                background = backgroundColor,
-                surface = surfaceColor,
-                onPrimary = if (MaterialTheme.colors.primary.luminance() <= 0.5f) Color.White else Color.Black,
-                onSecondary = if (MaterialTheme.colors.secondary.luminance() <= 0.5f) Color.White else Color.Black,
-                onBackground = if (MaterialTheme.colors.background.luminance() <= 0.5f) Color.White else Color.Black,
-                onSurface = if (MaterialTheme.colors.surface.luminance() <= 0.5f) Color.White else Color.Black
-            ),
-            darkColors(
-                primary = primaryColor,
-                secondary = secondaryColor,
-                background = backgroundColor,
-                surface = surfaceColor,
-                onPrimary = if (MaterialTheme.colors.primary.luminance() <= 0.5f) Color.White else Color.Black,
-                onSecondary = if (MaterialTheme.colors.secondary.luminance() <= 0.5f) Color.White else Color.Black,
-                onBackground = if (MaterialTheme.colors.background.luminance() <= 0.5f) Color.White else Color.Black,
-                onSurface = if (MaterialTheme.colors.surface.luminance() <= 0.5f) Color.White else Color.Black
-            )
+    MonetTheme(
+        lightColors(
+            primary = primaryColor,
+            secondary = secondaryColor,
+            background = backgroundColor,
+            surface = surfaceColor,
+            onPrimary = if (MaterialTheme.colors.primary.luminance() <= 0.5f) Color.White else Color.Black,
+            onSecondary = if (MaterialTheme.colors.secondary.luminance() <= 0.5f) Color.White else Color.Black,
+            onBackground = if (MaterialTheme.colors.background.luminance() <= 0.5f) Color.White else Color.Black,
+            onSurface = if (MaterialTheme.colors.surface.luminance() <= 0.5f) Color.White else Color.Black
+        ),
+        darkColors(
+            primary = primaryColor,
+            secondary = secondaryColor,
+            background = backgroundColor,
+            surface = surfaceColor,
+            onPrimary = if (MaterialTheme.colors.primary.luminance() <= 0.5f) Color.White else Color.Black,
+            onSecondary = if (MaterialTheme.colors.secondary.luminance() <= 0.5f) Color.White else Color.Black,
+            onBackground = if (MaterialTheme.colors.background.luminance() <= 0.5f) Color.White else Color.Black,
+            onSurface = if (MaterialTheme.colors.surface.luminance() <= 0.5f) Color.White else Color.Black
+        )
+    ) {
+        Surface(
+            Modifier.fillMaxSize(),
+            color = backgroundColor
         ) {
-            Surface(
-                Modifier.fillMaxSize(),
-                color = backgroundColor
-            ) {
-                Box {
-                    var screen by remember { mutableStateOf(0) }
-                    AnimatedContent(
-                        screen,
-                        Modifier.padding(bottom = 80.dp)
-                    ) { currentScreen ->
-                        when (currentScreen) {
-                            0 -> Palette(text, monetColors) { text = it }
-                            1 -> Generator {
-                                CoroutineScope(Dispatchers.IO).launch {
-                                    ImagePicker
-                                        .with(context)
-                                        .galleryOnly()
-                                        .createIntent {
-                                            startForImageResult.launch(it)
-                                        }
-                                }
+            Box {
+                var screen by remember { mutableStateOf(0) }
+                AnimatedContent(
+                    screen,
+                    Modifier.padding(bottom = 80.dp)
+                ) { currentScreen ->
+                    when (currentScreen) {
+                        0 -> Palette(text, monetColors) { text = it }
+                        1 -> Generator {
+                            CoroutineScope(Dispatchers.IO).launch {
+                                ImagePicker
+                                    .with(context)
+                                    .galleryOnly()
+                                    .createIntent {
+                                        startForImageResult.launch(it)
+                                    }
                             }
-                            2 -> Settings()
                         }
+                        2 -> Settings()
                     }
-                    BottomNavigationRail(
-                        mapOf(
-                            "Palette" to Icons.Outlined.Palette,
-                            "Generator" to Icons.Outlined.Brush,
-                            "Settings" to Icons.Outlined.Settings
-                        ),
-                        selectedItem = screen,
-                        Modifier.align(Alignment.BottomCenter),
-                        selectedColor = a1.getOrElse(0) { MaterialTheme.colors.background }
-                    ) { screen = it }
                 }
+                BottomNavigationRail(
+                    mapOf(
+                        "Palette" to Icons.Outlined.Palette,
+                        "Generator" to Icons.Outlined.Brush,
+                        "Settings" to Icons.Outlined.Settings
+                    ),
+                    selectedItem = screen,
+                    Modifier.align(Alignment.BottomCenter),
+                    selectedColor = a1.getOrElse(0) { MaterialTheme.colors.background }
+                ) { screen = it }
             }
         }
     }

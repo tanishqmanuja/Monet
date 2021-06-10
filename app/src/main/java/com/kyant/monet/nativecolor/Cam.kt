@@ -1,4 +1,4 @@
-package com.kyant.nativecolor
+package com.kyant.monet.nativecolor
 
 import kotlin.math.*
 
@@ -24,7 +24,6 @@ class Cam internal constructor(
         return viewed(Frame.DEFAULT)
     }
 
-    /* JADX INFO: Multiple debug info for r0v9 float: [D('rCBase' float), D('z' float)] */
     fun viewed(frame: Frame): Int {
         val alpha = if (chroma.toDouble() == 0.0 || j.toDouble() == 0.0) {
             0.0f

@@ -47,7 +47,6 @@ android {
 dependencies {
     val compose = "1.0.0-SNAPSHOT"
     val accompanist = "0.12.0-SNAPSHOT"
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.5.10")
     implementation("androidx.activity:activity-compose:1.3.0-SNAPSHOT")
     implementation("androidx.appcompat:appcompat:1.4.0-alpha02")
     implementation("androidx.compose.ui:ui:$compose")
@@ -66,5 +65,4 @@ dependencies {
     implementation("com.google.accompanist:accompanist-pager:$accompanist")
     implementation("com.google.accompanist:accompanist-systemuicontroller:$accompanist")
     implementation("com.google.android.material:material:1.4.0-rc01")
-    implementation("org.lsposed.hiddenapibypass:hiddenapibypass:2.0")
 }

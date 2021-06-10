@@ -1,4 +1,4 @@
-package com.kyant.nativecolor
+package com.kyant.monet.nativecolor
 
 object MathUtils {
     fun lerp(start: Float, stop: Float, amount: Float): Float {

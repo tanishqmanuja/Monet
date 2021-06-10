@@ -1,19 +1,12 @@
 package com.kyant.monet.color
 
 import androidx.compose.ui.graphics.Color
-import com.kyant.monet.colorscience.CAM16
-import com.kyant.monet.colorscience.CAM16.Companion.gamutMap
-import com.kyant.monet.colorscience.CAM16Parameters
-import com.kyant.monet.colorscience.Contrast.toY
-import com.kyant.monet.colorscience.RGB
-import com.kyant.monet.colorscience.SRGB.toXYZ
-import com.kyant.monet.colorscience.SRGB.tosRGB
-import com.kyant.monet.colorscience.XYZ
-import com.kyant.monet.math.Matrix3x1
-import com.kyant.monet.math.matrix3x1Of
+import androidx.compose.ui.graphics.toArgb
+import com.kyant.monet.nativecolor.Cam
+import com.kyant.monet.nativecolor.ColorUtils
 
-class MonetColor(rgb: RGB, param: CAM16Parameters = CAM16Parameters.Default) {
-    private val colorScheme = colorSchemeOf(rgb.toXYZ(param), param)
+class MonetColor(i: Int) {
+    private val colorScheme = colorSchemeOf(i)
     val accent1 = colorScheme[0]
     val accent2 = colorScheme[1]
     val accent3 = colorScheme[2]
@@ -28,64 +21,42 @@ class MonetColor(rgb: RGB, param: CAM16Parameters = CAM16Parameters.Default) {
   neutral2: ${neutral2.map { it.toColor() }}
 )"""
 
-    operator fun component1(): List<Matrix3x1> = accent1
-    operator fun component2(): List<Matrix3x1> = accent2
-    operator fun component3(): List<Matrix3x1> = accent3
-    operator fun component4(): List<Matrix3x1> = neutral1
-    operator fun component5(): List<Matrix3x1> = neutral2
+    operator fun component1(): List<Int> = accent1
+    operator fun component2(): List<Int> = accent2
+    operator fun component3(): List<Int> = accent3
+    operator fun component4(): List<Int> = neutral1
+    operator fun component5(): List<Int> = neutral2
 
     companion object {
-        fun Color.toRGB(): RGB = matrix3x1Of(red.toDouble(), green.toDouble(), blue.toDouble())
+        fun Color.toRGB(): Int = this.toArgb()
 
-        fun RGB.toColor(): Color = Color(
-            (0xFF * this[0]).toInt().coerceIn(0..255),
-            (0xFF * this[1]).toInt().coerceIn(0..255),
-            (0xFF * this[2]).toInt().coerceIn(0..255)
+        fun Int.toColor(): Color = Color(this)
+
+        private fun shadesOf(h: Float, C: Float): List<Int> = listOf(
+            ColorUtils.CAMToColor(h, C, 99.0f),
+            ColorUtils.CAMToColor(h, C, 95.0f),
+            ColorUtils.CAMToColor(h, C, 90.0f),
+            ColorUtils.CAMToColor(h, C, 80.0f),
+            ColorUtils.CAMToColor(h, C, 70.0f),
+            ColorUtils.CAMToColor(h, C, 60.0f),
+            ColorUtils.CAMToColor(h, C, 49.0f),
+            ColorUtils.CAMToColor(h, C, 40.0f),
+            ColorUtils.CAMToColor(h, C, 30.0f),
+            ColorUtils.CAMToColor(h, C, 20.0f),
+            ColorUtils.CAMToColor(h, C, 10.0f),
+            ColorUtils.CAMToColor(h, C, 0.0f)
         )
 
-        private fun shadesOf(
-            h: Double,
-            C: Double,
-            param: CAM16Parameters = CAM16Parameters.Default
-        ): Array<Matrix3x1> = arrayOf(
-            gamutMap(99.0.toY(), C, h, param),
-            gamutMap(95.0.toY(), C, h, param),
-            gamutMap(90.0.toY(), C, h, param),
-            gamutMap(80.0.toY(), C, h, param),
-            gamutMap(70.0.toY(), C, h, param),
-            gamutMap(60.0.toY(), C, h, param),
-            gamutMap(49.0.toY(), C, h, param),
-            gamutMap(40.0.toY(), C, h, param),
-            gamutMap(30.0.toY(), C, h, param),
-            gamutMap(20.0.toY(), C, h, param),
-            gamutMap(10.0.toY(), C, h, param),
-            gamutMap(0.0.toY(), C, h, param)
-        )
+        private fun colorSchemeOf(i: Int): List<List<Int>> {
+            val hue = Cam.fromInt(i).hue
 
-        private fun colorSchemeOf(
-            xyz: XYZ,
-            param: CAM16Parameters = CAM16Parameters.Default
-        ): List<List<RGB>> {
-            val cam16color = CAM16(xyz, param)
-            val y = xyz[1]
+            val accent1 = shadesOf(hue, 48.0f)
+            val accent2 = shadesOf(hue, 16.0f)
+            val accent3 = shadesOf(32.0f + hue, 48.0f)
+            val neutral1 = shadesOf(hue, 4.0f)
+            val neutral2 = shadesOf(hue, 8.0f)
 
-            val color = CAM16(gamutMap(y, 48.0, cam16color.h, param), param)
-            val shades = shadesOf(color.h, color.c, param)
-
-            val color2 = CAM16(gamutMap(y, 16.0, cam16color.h, param), param)
-            val shades2 = shadesOf(color2.h, color2.c, param)
-
-            val color3 = CAM16(gamutMap(y, 32.0, cam16color.h + 60.0, param), param)
-            val shades3 = shadesOf(color3.h, color3.c, param)
-
-            val color4 = CAM16(gamutMap(y, 8.0, cam16color.h, param), param)
-            val shades4 = shadesOf(color4.h, color4.c, param)
-
-            val color5 = CAM16(gamutMap(y, 4.0, cam16color.h, param), param)
-            val shades5 = shadesOf(color5.h, color5.c, param)
-
-            return arrayOf(shades, shades2, shades3, shades4, shades5)
-                .map { shade -> shade.map { it.tosRGB(param) } }
+            return listOf(accent1, accent2, accent3, neutral1, neutral2)
         }
     }
 }

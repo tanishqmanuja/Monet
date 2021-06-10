@@ -1,17 +1,8 @@
 package com.kyant.monet.color
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import com.kyant.monet.color.MonetColor.Companion.toColor
 import com.kyant.monet.color.MonetColor.Companion.toRGB
-import com.kyant.monet.colorscience.CAM16Parameters
-
-typealias MonetParameters = CAM16Parameters
-
-val DefaultMonetParameters = CAM16Parameters.Default
-
-val LocalMonetParameters = staticCompositionLocalOf { DefaultMonetParameters }
 
 data class MonetColors(
     val accent1: List<Color> = emptyList(),
@@ -21,11 +12,8 @@ data class MonetColors(
     val neutral2: List<Color> = emptyList()
 )
 
-fun monetColors(
-    color: Color,
-    monetParameters: MonetParameters = DefaultMonetParameters
-): MonetColors {
-    val (a1, a2, a3, n1, n2) = MonetColor(color.toRGB(), monetParameters)
+fun monetColors(color: Color): MonetColors {
+    val (a1, a2, a3, n1, n2) = MonetColor(color.toRGB())
     return MonetColors(
         a1.map { it.toColor() },
         a2.map { it.toColor() },
@@ -34,6 +22,3 @@ fun monetColors(
         n2.map { it.toColor() }
     )
 }
-
-@Composable
-fun monetColorsOf(color: Color): MonetColors = monetColors(color, LocalMonetParameters.current)

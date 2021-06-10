@@ -1,4 +1,4 @@
-package com.kyant.nativecolor
+package com.kyant.monet.nativecolor
 
 import android.graphics.Color
 import kotlin.math.*
