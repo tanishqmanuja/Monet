@@ -86,9 +86,10 @@ fun Content(startForImageResult: ActivityResultLauncher<Intent>) {
         }
 
         val (a1, a2, a3, n1, n2) = monetColors
-        val primaryColor = a1.getOrElse(4) { MaterialTheme.colors.primary }
-        val secondaryColor = a3.getOrElse(3) { MaterialTheme.colors.primary }
-        val backgroundColor = n2.getOrElse(0) { MaterialTheme.colors.background }
+        val primaryColor = a1.getOrElse(5) { MaterialTheme.colors.primary }
+        val secondaryColor = a3.getOrElse(4) { MaterialTheme.colors.primary }
+        val backgroundColor = n2.getOrElse(1) { MaterialTheme.colors.background }
+        val surfaceColor = n2.getOrElse(0) { MaterialTheme.colors.surface }
         SideEffect {
             systemUiController.setSystemBarsColor(backgroundColor)
         }
@@ -98,21 +99,21 @@ fun Content(startForImageResult: ActivityResultLauncher<Intent>) {
                 primary = primaryColor,
                 secondary = secondaryColor,
                 background = backgroundColor,
-                surface = Color.White,
+                surface = surfaceColor,
                 onPrimary = if (MaterialTheme.colors.primary.luminance() <= 0.5f) Color.White else Color.Black,
                 onSecondary = if (MaterialTheme.colors.secondary.luminance() <= 0.5f) Color.White else Color.Black,
                 onBackground = if (MaterialTheme.colors.background.luminance() <= 0.5f) Color.White else Color.Black,
-                onSurface = Color.Black
+                onSurface = if (MaterialTheme.colors.surface.luminance() <= 0.5f) Color.White else Color.Black
             ),
             darkColors(
                 primary = primaryColor,
                 secondary = secondaryColor,
                 background = backgroundColor,
-                surface = Color.White,
+                surface = surfaceColor,
                 onPrimary = if (MaterialTheme.colors.primary.luminance() <= 0.5f) Color.White else Color.Black,
                 onSecondary = if (MaterialTheme.colors.secondary.luminance() <= 0.5f) Color.White else Color.Black,
                 onBackground = if (MaterialTheme.colors.background.luminance() <= 0.5f) Color.White else Color.Black,
-                onSurface = Color.Black
+                onSurface = if (MaterialTheme.colors.surface.luminance() <= 0.5f) Color.White else Color.Black
             )
         ) {
             Surface(

@@ -48,6 +48,7 @@ class MonetColor(rgb: RGB, param: CAM16Parameters = CAM16Parameters.Default) {
             C: Double,
             param: CAM16Parameters = CAM16Parameters.Default
         ): Array<Matrix3x1> = arrayOf(
+            gamutMap(99.0.toY(), C, h, param),
             gamutMap(95.0.toY(), C, h, param),
             gamutMap(90.0.toY(), C, h, param),
             gamutMap(80.0.toY(), C, h, param),

@@ -155,7 +155,7 @@ fun ColorScheme(vararg shades: Pair<String, List<Color>>) {
                 bottomCornerSize,
                 bottomCornerSize
             ),
-            backgroundColor = Color.White,
+            backgroundColor = MaterialTheme.colors.surface,
             elevation = 0.dp
         ) {
             Column {
@@ -187,7 +187,10 @@ fun ColorScheme(vararg shades: Pair<String, List<Color>>) {
                     ) {
                         ColorButton(text = "0")
                         shade.forEachIndexed { i, color ->
-                            ColorButton(color, (if (i == 0) 50 else i * 100).toString())
+                            ColorButton(
+                                color,
+                                (if (i == 0) 10 else if (i == 1) 50 else (i - 1) * 100).toString()
+                            )
                         }
                     }
                 }
