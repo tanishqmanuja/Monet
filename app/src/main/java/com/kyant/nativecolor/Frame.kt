@@ -1,4 +1,4 @@
-package com.kyant.nativemonet
+package com.kyant.nativecolor
 
 import kotlin.math.exp
 import kotlin.math.pow
