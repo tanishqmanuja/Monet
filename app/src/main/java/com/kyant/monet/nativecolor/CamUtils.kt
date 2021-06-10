@@ -1,6 +1,7 @@
 package com.kyant.monet.nativecolor
 
 import android.graphics.Color
+import kotlin.math.pow
 
 object CamUtils {
     val CAM16RGB_TO_XYZ = arrayOf(
@@ -74,7 +75,7 @@ object CamUtils {
 
     fun yFromLstar(lstar: Float): Float {
         return if (lstar > 8.0f) {
-            Math.pow((lstar.toDouble() + 16.0) / 116.0, 3.0).toFloat() * 100.0f
+            ((lstar.toDouble() + 16.0) / 116.0).pow(3.0).toFloat() * 100.0f
         } else lstar / 903.2963f * 100.0f
     }
 
@@ -82,10 +83,7 @@ object CamUtils {
         val normalized = rgbComponent.toFloat() / 255.0f
         return if (normalized <= 0.04045f) {
             normalized / 12.92f * 100.0f
-        } else Math.pow(
-            ((0.055f + normalized) / 1.055f).toDouble(),
-            2.4000000953674316
-        )
+        } else ((0.055f + normalized) / 1.055f).toDouble().pow(2.4000000953674316)
             .toFloat() * 100.0f
     }
 }

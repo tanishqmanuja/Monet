@@ -83,7 +83,7 @@ fun Content(startForImageResult: ActivityResultLauncher<Intent>) {
 
     val (a1, a2, a3, n1, n2) = monetColors
     val primaryColor = a1.getOrElse(5) { MaterialTheme.colors.primary }
-    val secondaryColor = a3.getOrElse(4) { MaterialTheme.colors.primary }
+    val secondaryColor = a3.getOrElse(5) { MaterialTheme.colors.secondary }
     val backgroundColor = n2.getOrElse(1) { MaterialTheme.colors.background }
     val surfaceColor = n2.getOrElse(0) { MaterialTheme.colors.surface }
     SideEffect {
@@ -145,7 +145,7 @@ fun Content(startForImageResult: ActivityResultLauncher<Intent>) {
                     ),
                     selectedItem = screen,
                     Modifier.align(Alignment.BottomCenter),
-                    selectedColor = a1.getOrElse(0) { MaterialTheme.colors.background }
+                    selectedColor = a1.getOrElse(2) { MaterialTheme.colors.background }
                 ) { screen = it }
             }
         }

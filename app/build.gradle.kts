@@ -4,15 +4,15 @@ plugins {
 }
 
 android {
-    compileSdkPreview = "S"
+    compileSdk = 30
     buildToolsVersion = "31.0.0 rc5"
 
     defaultConfig {
         applicationId = "com.kyant.monet"
         minSdk = 21
-        targetSdkPreview = "S"
-        versionCode = 2
-        versionName = "0.1.1"
+        targetSdk = 30
+        versionCode = 3
+        versionName = "0.2.0"
     }
 
     buildTypes {
