@@ -1,5 +1,6 @@
 package com.kyant.materialyou.component
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -54,13 +55,12 @@ fun BottomNavigationRail(
                         label,
                         Modifier
                             .background(
-                                if (selected) LocalMonetColors.current.accent1[2] else Color.Transparent,
-                                CircleShape
+                                animateColorAsState(
+                                    if (selected) LocalMonetColors.current.accent1[2]
+                                    else LocalMonetColors.current.neutral1[1]
+                                ).value, CircleShape
                             )
-                            .padding(
-                                animateDpAsState(if (selected) 16.dp else 4.dp).value,
-                                4.dp
-                            )
+                            .padding(animateDpAsState(if (selected) 16.dp else 4.dp).value, 4.dp)
                     )
                     Spacer(Modifier.height(8.dp))
                     Text(
