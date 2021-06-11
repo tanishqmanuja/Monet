@@ -10,7 +10,11 @@ object Shades {
         var i = 2
         while (i < 12) {
             iArr[i] =
-                ColorUtils.CAMToColor(hue, chroma, if (i == 6) 49.6f else (100 - (i - 1) * 10).toFloat())
+                ColorUtils.CAMToColor(
+                    hue,
+                    chroma,
+                    if (i == 6) 49.6f else (100 - (i - 1) * 10).toFloat()
+                )
             i++
         }
         return iArr.toList()
