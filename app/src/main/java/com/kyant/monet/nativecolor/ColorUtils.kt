@@ -12,6 +12,7 @@ object ColorUtils {
     private const val XYZ_WHITE_REFERENCE_X = 95.047
     private const val XYZ_WHITE_REFERENCE_Y = 100.0
     private const val XYZ_WHITE_REFERENCE_Z = 108.883
+
     fun compositeColors(foreground: Int, background: Int): Int {
         val bgAlpha = Color.alpha(background)
         val fgAlpha = Color.alpha(foreground)
@@ -361,7 +362,6 @@ object ColorUtils {
             return result2
         }
 
-    /* access modifiers changed from: private */
     interface ContrastCalculator {
         fun calculateContrast(i: Int, i2: Int, i3: Int): Double
     }

@@ -1,23 +1,24 @@
 package com.kyant.monet.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.*
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Typography
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.kyant.monet.R
+import com.kyant.monet.color.ProvideLocalMonetColors
 
 @Composable
 fun MonetTheme(
-    lightkColors: Colors = lightColors(),
-    darkColors: Colors = darkColors(),
+    color: Color = Color(0xFF1B6EF3),
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-    val colors = if (darkTheme) darkColors else lightkColors
     val typography = Typography(
         defaultFontFamily = FontFamily(
             Font(
@@ -38,11 +39,12 @@ fun MonetTheme(
         )
     )
     MaterialTheme(
-        colors = colors,
         typography = typography,
         content = {
-            ProvideWindowInsets {
-                content()
+            ProvideLocalMonetColors(color, darkTheme) {
+                ProvideWindowInsets {
+                    content()
+                }
             }
         }
     )

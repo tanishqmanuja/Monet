@@ -10,7 +10,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Photo
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,7 +29,9 @@ import com.google.accompanist.flowlayout.FlowRow
 import com.google.accompanist.flowlayout.MainAxisAlignment
 import com.kyant.materialyou.component.StretchScrollableColumn
 import com.kyant.monet.MainActivityDataModel
+import com.kyant.monet.color.LocalMonetColors
 import com.kyant.monet.color.findCentroids
+import com.kyant.monet.ui.util.contentColor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -48,7 +52,8 @@ fun Generator(onPickButtonClick: () -> Unit) {
         Card(
             Modifier.padding(horizontal = 16.dp),
             shape = RoundedCornerShape(28.dp),
-            backgroundColor = MaterialTheme.colors.secondary,
+            backgroundColor = LocalMonetColors.current.accent3[4],
+            contentColor = LocalMonetColors.current.accent3[4].contentColor(),
             elevation = 0.dp
         ) {
             Column {
@@ -63,7 +68,7 @@ fun Generator(onPickButtonClick: () -> Unit) {
                     horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    CompositionLocalProvider(LocalContentColor provides MaterialTheme.colors.onSecondary) {
+                    CompositionLocalProvider(LocalContentColor provides LocalMonetColors.current.accent3[4].contentColor()) {
                         Icon(Icons.Outlined.Photo, "Photo")
                         Spacer(Modifier.width(16.dp))
                         Text(

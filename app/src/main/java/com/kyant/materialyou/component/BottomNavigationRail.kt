@@ -6,33 +6,32 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.Card
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.kyant.monet.color.LocalMonetColors
+import com.kyant.monet.ui.util.contentColor
 
 @Composable
 fun BottomNavigationRail(
     items: Map<String, ImageVector>,
     selectedItem: Int,
     modifier: Modifier = Modifier,
-    backgroundColor: Color = MaterialTheme.colors.background,
-    contentColor: Color = contentColorFor(backgroundColor),
-    selectedColor: Color = MaterialTheme.colors.primary.copy(ContentAlpha.disabled),
-    elevation: Dp = BottomNavigationDefaults.Elevation,
     onClick: (Int) -> Unit
 ) {
     Card(
         modifier.height(80.dp),
         shape = RoundedCornerShape(0.dp),
-        backgroundColor = backgroundColor,
-        contentColor = contentColor,
-        elevation = elevation
+        backgroundColor = LocalMonetColors.current.neutral1[1],
+        contentColor = LocalMonetColors.current.neutral1[1].contentColor()
     ) {
         Row(
             Modifier.fillMaxSize(),
@@ -55,7 +54,7 @@ fun BottomNavigationRail(
                         label,
                         Modifier
                             .background(
-                                if (selected) selectedColor else Color.Transparent,
+                                if (selected) LocalMonetColors.current.accent1[2] else Color.Transparent,
                                 CircleShape
                             )
                             .padding(

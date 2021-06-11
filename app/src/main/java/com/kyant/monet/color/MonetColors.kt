@@ -1,24 +1,46 @@
 package com.kyant.monet.color
 
+import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
-import com.kyant.monet.color.MonetColor.Companion.toColor
-import com.kyant.monet.color.MonetColor.Companion.toRGB
+import androidx.compose.ui.graphics.toArgb
+import com.kyant.monet.nativemonet.ColorScheme
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+
+val LocalMonetColors = compositionLocalOf { monetColorsOf(Color(0xFF1B6EF3), false) }
+
+@Composable
+fun ProvideLocalMonetColors(
+    color: Color,
+    darkTheme: Boolean = false,
+    content: @Composable () -> Unit
+) {
+    var monetColors by remember { mutableStateOf(monetColorsOf(Color(0xFF1B6EF3), darkTheme)) }
+    LaunchedEffect(color, darkTheme) {
+        withContext(Dispatchers.IO) {
+            monetColors = monetColorsOf(color, darkTheme)
+        }
+    }
+    CompositionLocalProvider(LocalMonetColors provides monetColors) {
+        content()
+    }
+}
 
 data class MonetColors(
-    val accent1: List<Color> = emptyList(),
-    val accent2: List<Color> = emptyList(),
-    val accent3: List<Color> = emptyList(),
-    val neutral1: List<Color> = emptyList(),
-    val neutral2: List<Color> = emptyList()
+    val accent1: List<Color>,
+    val accent2: List<Color>,
+    val accent3: List<Color>,
+    val neutral1: List<Color>,
+    val neutral2: List<Color>
 )
 
-fun monetColors(color: Color): MonetColors {
-    val (a1, a2, a3, n1, n2) = MonetColor(color.toRGB())
+fun monetColorsOf(color: Color, darkTheme: Boolean = false): MonetColors {
+    val scheme = ColorScheme(color.toArgb(), darkTheme)
     return MonetColors(
-        a1.map { it.toColor() },
-        a2.map { it.toColor() },
-        a3.map { it.toColor() },
-        n1.map { it.toColor() },
-        n2.map { it.toColor() }
+        scheme.accent1.map { Color(it) },
+        scheme.accent2.map { Color(it) },
+        scheme.accent3.map { Color(it) },
+        scheme.neutral1.map { Color(it) },
+        scheme.neutral2.map { Color(it) }
     )
 }

@@ -21,7 +21,6 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -32,15 +31,17 @@ import androidx.compose.ui.unit.dp
 import com.google.accompanist.flowlayout.FlowRow
 import com.google.accompanist.flowlayout.MainAxisAlignment
 import com.kyant.materialyou.component.StretchScrollableColumn
+import com.kyant.monet.color.LocalMonetColors
 import com.kyant.monet.color.MonetColors
+import com.kyant.monet.ui.util.contentColor
 
 @Composable
 fun Palette(
     text: TextFieldValue,
-    monetColors: MonetColors,
+    colors: MonetColors,
     onValueChange: (TextFieldValue) -> Unit
 ) {
-    val (a1, a2, a3, n1, n2) = monetColors
+    val (a1, a2, a3, n1, n2) = colors
     StretchScrollableColumn(Modifier.fillMaxSize()) {
         Spacer(Modifier.height(56.dp))
         Text(
@@ -58,10 +59,10 @@ fun Palette(
                     .padding(end = 20.dp)
                     .clip(CircleShape)
                     .clickable { }
-                    .background(MaterialTheme.colors.primary)
+                    .background(LocalMonetColors.current.accent1[5])
                     .padding(16.dp)
                     .align(Alignment.CenterEnd),
-                tint = MaterialTheme.colors.onPrimary
+                tint = LocalMonetColors.current.accent1[5].contentColor()
             )
         }
         Spacer(Modifier.height(24.dp))
@@ -105,8 +106,8 @@ fun ColorTextField(text: TextFieldValue, onValueChange: (TextFieldValue) -> Unit
         singleLine = true,
         shape = CircleShape,
         colors = TextFieldDefaults.textFieldColors(
-            textColor = MaterialTheme.colors.primary,
-            backgroundColor = MaterialTheme.colors.surface,
+            textColor = LocalMonetColors.current.accent1[5],
+            backgroundColor = LocalMonetColors.current.neutral2[1],
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent
         )
@@ -155,7 +156,7 @@ fun ColorScheme(vararg shades: Pair<String, List<Color>>) {
                 bottomCornerSize,
                 bottomCornerSize
             ),
-            backgroundColor = MaterialTheme.colors.surface,
+            backgroundColor = LocalMonetColors.current.neutral2[1],
             elevation = 0.dp
         ) {
             Column {
@@ -201,7 +202,7 @@ fun ColorScheme(vararg shades: Pair<String, List<Color>>) {
                 Modifier
                     .fillMaxWidth()
                     .height(2.dp)
-                    .background(MaterialTheme.colors.background)
+                    .background(Color.Transparent)
             )
         }
     }
@@ -220,7 +221,7 @@ fun ColorButton(color: Color = Color.White, text: String = "") {
         Text(
             text,
             Modifier.align(Alignment.Center),
-            color = if (color.luminance() <= 0.5f) Color.White else Color.Black,
+            color = color.contentColor(),
             fontWeight = FontWeight.Medium,
             style = MaterialTheme.typography.body1
         )
