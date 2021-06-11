@@ -13,7 +13,7 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        maven("https://androidx.dev/snapshots/builds/7440113/artifacts/repository")
+        maven("https://androidx.dev/snapshots/builds/7447403/artifacts/repository")
         maven("https://oss.sonatype.org/content/repositories/snapshots")
         maven("https://jitpack.io")
     }
