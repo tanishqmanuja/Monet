@@ -11,8 +11,8 @@ android {
         applicationId = "com.kyant.monet"
         minSdk = 21
         targetSdk = 30
-        versionCode = 5
-        versionName = "0.2.2"
+        versionCode = 6
+        versionName = "0.3.0"
     }
 
     buildTypes {
@@ -47,6 +47,7 @@ android {
 dependencies {
     val compose = "1.0.0-SNAPSHOT"
     val accompanist = "0.12.0-SNAPSHOT"
+    implementation(project(":Monet"))
     implementation("androidx.activity:activity-compose:1.3.0-SNAPSHOT")
     implementation("androidx.appcompat:appcompat:1.4.0-alpha02")
     implementation("androidx.compose.ui:ui:$compose")

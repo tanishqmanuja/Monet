@@ -3,7 +3,7 @@ package com.kyant.monet.nativecolor
 import android.graphics.Color
 import kotlin.math.pow
 
-object CamUtils {
+internal object CamUtils {
     val CAM16RGB_TO_XYZ = arrayOf(
         doubleArrayOf(1.86206786, -1.01125463, 0.14918677),
         doubleArrayOf(0.38752654, 0.62144744, -0.00897398),

@@ -2,7 +2,7 @@ package com.kyant.monet.nativecolor
 
 import kotlin.math.*
 
-class Cam internal constructor(
+internal class Cam internal constructor(
     val hue: Double,
     val chroma: Double,
     val j: Double,

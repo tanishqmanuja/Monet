@@ -28,9 +28,9 @@ import com.google.accompanist.coil.rememberCoilPainter
 import com.google.accompanist.flowlayout.FlowRow
 import com.google.accompanist.flowlayout.MainAxisAlignment
 import com.kyant.materialyou.component.StretchScrollableColumn
-import com.kyant.monet.MainActivityDataModel
 import com.kyant.monet.color.LocalMonetColors
-import com.kyant.monet.color.findCentroids
+import com.kyant.monet.MainActivityDataModel
+import com.kyant.monet.color.colorCentroids
 import com.kyant.monet.ui.util.contentColor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -106,7 +106,7 @@ fun Generator(onPickButtonClick: () -> Unit) {
                             colors.add(Color(scaledBitmap[i, j]))
                         }
                     }
-                    MainActivityDataModel.centroids = colors.findCentroids(8)
+                    MainActivityDataModel.centroids = colors.colorCentroids(8)
                 }
             }
             FlowRow(

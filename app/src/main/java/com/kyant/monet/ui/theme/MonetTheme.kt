@@ -11,7 +11,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.kyant.monet.R
-import com.kyant.monet.color.ProvideLocalMonetColors
+import com.kyant.monet.color.ProvideMonetColors
 
 @Composable
 fun MonetTheme(
@@ -41,7 +41,7 @@ fun MonetTheme(
     MaterialTheme(
         typography = typography,
         content = {
-            ProvideLocalMonetColors(color, darkTheme) {
+            ProvideMonetColors(color, darkTheme) {
                 ProvideWindowInsets {
                     content()
                 }

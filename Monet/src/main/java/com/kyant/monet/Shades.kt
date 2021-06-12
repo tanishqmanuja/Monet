@@ -1,4 +1,4 @@
-package com.kyant.monet.nativemonet
+package com.kyant.monet
 
 import com.kyant.monet.nativecolor.ColorUtils
 

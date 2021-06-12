@@ -4,7 +4,7 @@ import android.graphics.Color
 import kotlin.math.pow
 import kotlin.math.roundToInt
 
-object ColorUtils {
+internal object ColorUtils {
     private const val XYZ_WHITE_REFERENCE_Y = 100.0
 
     fun colorToCAM(color: Int): Cam {

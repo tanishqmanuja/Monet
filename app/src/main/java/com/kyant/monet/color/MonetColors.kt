@@ -3,14 +3,14 @@ package com.kyant.monet.color
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
-import com.kyant.monet.nativemonet.ColorScheme
+import com.kyant.monet.ColorScheme
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 val LocalMonetColors = compositionLocalOf { monetColorsOf(Color(0xFF1B6EF3), false) }
 
 @Composable
-fun ProvideLocalMonetColors(
+fun ProvideMonetColors(
     color: Color,
     darkTheme: Boolean = false,
     content: @Composable () -> Unit

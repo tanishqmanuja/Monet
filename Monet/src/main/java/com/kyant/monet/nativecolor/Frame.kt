@@ -4,7 +4,7 @@ import kotlin.math.exp
 import kotlin.math.pow
 import kotlin.math.sqrt
 
-class Frame private constructor(
+internal class Frame private constructor(
     val n: Double,
     val aw: Double,
     val nbb: Double,
