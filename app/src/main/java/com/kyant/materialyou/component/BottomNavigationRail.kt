@@ -17,8 +17,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
-import com.kyant.monet.color.LocalMonetColors
-import com.kyant.monet.ui.util.contentColor
+import com.kyant.monetdemo.color.LocalMonetColors
+import com.kyant.monetdemo.ui.util.contentColor
 
 @Composable
 fun BottomNavigationRail(

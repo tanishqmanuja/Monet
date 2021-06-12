@@ -8,7 +8,7 @@ android {
     buildToolsVersion = "31.0.0 rc5"
 
     defaultConfig {
-        applicationId = "com.kyant.monet"
+        applicationId = "com.kyant.monetdemo"
         minSdk = 21
         targetSdk = 30
         versionCode = 6

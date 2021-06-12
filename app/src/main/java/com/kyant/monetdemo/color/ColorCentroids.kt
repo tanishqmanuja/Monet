@@ -1,4 +1,4 @@
-package com.kyant.monet.color
+package com.kyant.monetdemo.color
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb

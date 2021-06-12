@@ -1,4 +1,4 @@
-package com.kyant.monet.ui.screen
+package com.kyant.monetdemo.ui.screen
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -31,9 +31,9 @@ import androidx.compose.ui.unit.dp
 import com.google.accompanist.flowlayout.FlowRow
 import com.google.accompanist.flowlayout.MainAxisAlignment
 import com.kyant.materialyou.component.StretchScrollableColumn
-import com.kyant.monet.color.LocalMonetColors
-import com.kyant.monet.color.MonetColors
-import com.kyant.monet.ui.util.contentColor
+import com.kyant.monetdemo.color.LocalMonetColors
+import com.kyant.monetdemo.color.MonetColors
+import com.kyant.monetdemo.ui.util.contentColor
 
 @Composable
 fun Palette(

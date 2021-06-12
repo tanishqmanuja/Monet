@@ -1,4 +1,4 @@
-package com.kyant.monet
+package com.kyant.monetdemo
 
 import android.app.Activity
 import android.content.Intent
@@ -28,11 +28,11 @@ import androidx.compose.ui.unit.dp
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.kyant.materialyou.component.BottomNavigationRail
-import com.kyant.monet.color.LocalMonetColors
-import com.kyant.monet.ui.screen.Generator
-import com.kyant.monet.ui.screen.Palette
-import com.kyant.monet.ui.screen.Settings
-import com.kyant.monet.ui.theme.MonetTheme
+import com.kyant.monetdemo.color.LocalMonetColors
+import com.kyant.monetdemo.ui.screen.Generator
+import com.kyant.monetdemo.ui.screen.Palette
+import com.kyant.monetdemo.ui.screen.Settings
+import com.kyant.monetdemo.ui.theme.MonetTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

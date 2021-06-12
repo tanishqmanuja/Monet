@@ -1,4 +1,4 @@
-package com.kyant.monet.ui.screen
+package com.kyant.monetdemo.ui.screen
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,7 +16,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.kyant.materialyou.component.Selector
 import com.kyant.materialyou.component.StretchScrollableColumn
-import com.kyant.monet.color.LocalMonetColors
+import com.kyant.monetdemo.color.LocalMonetColors
 
 @Composable
 fun Settings() {

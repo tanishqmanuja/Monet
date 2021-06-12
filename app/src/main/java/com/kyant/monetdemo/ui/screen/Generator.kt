@@ -1,4 +1,4 @@
-package com.kyant.monet.ui.screen
+package com.kyant.monetdemo.ui.screen
 
 import android.graphics.drawable.BitmapDrawable
 import androidx.compose.animation.AnimatedContent
@@ -28,10 +28,10 @@ import com.google.accompanist.coil.rememberCoilPainter
 import com.google.accompanist.flowlayout.FlowRow
 import com.google.accompanist.flowlayout.MainAxisAlignment
 import com.kyant.materialyou.component.StretchScrollableColumn
-import com.kyant.monet.color.LocalMonetColors
-import com.kyant.monet.MainActivityDataModel
-import com.kyant.monet.color.colorCentroids
-import com.kyant.monet.ui.util.contentColor
+import com.kyant.monetdemo.color.LocalMonetColors
+import com.kyant.monetdemo.MainActivityDataModel
+import com.kyant.monetdemo.color.colorCentroids
+import com.kyant.monetdemo.ui.util.contentColor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

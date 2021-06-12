@@ -1,4 +1,4 @@
-package com.kyant.monet.ui.theme
+package com.kyant.monetdemo.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
@@ -10,8 +10,8 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import com.google.accompanist.insets.ProvideWindowInsets
-import com.kyant.monet.R
-import com.kyant.monet.color.ProvideMonetColors
+import com.kyant.monetdemo.R
+import com.kyant.monetdemo.color.ProvideMonetColors
 
 @Composable
 fun MonetTheme(
