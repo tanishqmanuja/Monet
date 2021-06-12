@@ -45,7 +45,7 @@ fun Palette(
     StretchScrollableColumn(Modifier.fillMaxSize()) {
         Spacer(Modifier.height(56.dp))
         Text(
-            "Monet Color",
+            "monet Color",
             Modifier.padding(horizontal = 24.dp),
             fontWeight = FontWeight.Medium,
             style = MaterialTheme.typography.h4

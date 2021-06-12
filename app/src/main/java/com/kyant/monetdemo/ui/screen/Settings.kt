@@ -30,7 +30,7 @@ fun Settings() {
         )
         Spacer(Modifier.height(56.dp))
         Selector(
-            "Monet impl.",
+            "monet impl.",
             Icons.Outlined.Landscape,
             LocalMonetColors.current.accent1[2],
             "A12 Beta 2",
