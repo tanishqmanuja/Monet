@@ -11,8 +11,8 @@ android {
         applicationId = "com.kyant.monet"
         minSdk = 21
         targetSdk = 30
-        versionCode = 4
-        versionName = "0.2.1"
+        versionCode = 5
+        versionName = "0.2.2"
     }
 
     buildTypes {
