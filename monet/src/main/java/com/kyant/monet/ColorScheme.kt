@@ -2,7 +2,7 @@ package com.kyant.monet
 
 import com.kyant.monet.nativecolor.Cam
 
-class ColorScheme(rgb: Int, private val darkTheme: Boolean = false) {
+internal class ColorScheme(rgb: Int, private val darkTheme: Boolean = false) {
     val hue: Double = Cam.fromInt(rgb).hue
     val accent1 = Shades.of(hue, 48.0)
     val accent2 = Shades.of(hue, 16.0)
