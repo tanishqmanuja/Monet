@@ -66,7 +66,7 @@ fun Palette(
             )
         }
         Spacer(Modifier.height(24.dp))
-        ColorScheme(
+        ColorSchemePalette(
             "Accent 1" to a1,
             "Accent 2" to a2,
             "Accent 3" to a3,
@@ -89,7 +89,7 @@ fun ColorTextField(text: TextFieldValue, onValueChange: (TextFieldValue) -> Unit
             .padding(16.dp, 32.dp)
             .height(60.dp),
         textStyle = MaterialTheme.typography.h6.copy(textAlign = TextAlign.Center),
-        label = {
+        placeholder = {
             Text(
                 "Enter color here",
                 Modifier.fillMaxWidth(),
@@ -107,7 +107,8 @@ fun ColorTextField(text: TextFieldValue, onValueChange: (TextFieldValue) -> Unit
         shape = CircleShape,
         colors = TextFieldDefaults.textFieldColors(
             textColor = LocalMonetColors.current.accent1[5],
-            backgroundColor = LocalMonetColors.current.neutral2[1],
+            backgroundColor = LocalMonetColors.current.neutral1[0],
+            cursorColor = LocalMonetColors.current.accent1[5],
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent
         )
@@ -116,7 +117,7 @@ fun ColorTextField(text: TextFieldValue, onValueChange: (TextFieldValue) -> Unit
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun ColorScheme(vararg shades: Pair<String, List<Color>>) {
+fun ColorSchemePalette(vararg shades: Pair<String, List<Color>>) {
     val expandedItems = remember { mutableStateListOf<Boolean>() }
     shades.forEachIndexed { i, (name, shade) ->
         if (expandedItems.getOrNull(i) == null) {
@@ -156,7 +157,7 @@ fun ColorScheme(vararg shades: Pair<String, List<Color>>) {
                 bottomCornerSize,
                 bottomCornerSize
             ),
-            backgroundColor = LocalMonetColors.current.neutral2[1],
+            backgroundColor = LocalMonetColors.current.neutral1[0],
             elevation = 0.dp
         ) {
             Column {
@@ -186,9 +187,9 @@ fun ColorScheme(vararg shades: Pair<String, List<Color>>) {
                             .padding(vertical = 32.dp),
                         mainAxisAlignment = MainAxisAlignment.Center
                     ) {
-                        ColorButton(text = "0")
+                        ColorCircle(text = "0")
                         shade.forEachIndexed { i, color ->
-                            ColorButton(
+                            ColorCircle(
                                 color,
                                 (if (i == 0) 10 else if (i == 1) 50 else (i - 1) * 100).toString()
                             )
@@ -209,7 +210,7 @@ fun ColorScheme(vararg shades: Pair<String, List<Color>>) {
 }
 
 @Composable
-fun ColorButton(color: Color = Color.White, text: String = "") {
+fun ColorCircle(color: Color = Color.White, text: String = "") {
     Box(
         Modifier
             .padding(4.dp)

@@ -29,9 +29,9 @@ import com.google.accompanist.flowlayout.FlowRow
 import com.google.accompanist.flowlayout.MainAxisAlignment
 import com.kyant.materialyou.ui.StretchScrollableColumn
 import com.kyant.monet.LocalMonetColors
-import com.kyant.monetdemo.MainActivityDataModel
 import com.kyant.monet.colorCentroidsOf
 import com.kyant.monet.contentColor
+import com.kyant.monetdemo.MainActivityDataModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -117,7 +117,7 @@ fun Generator(onPickButtonClick: () -> Unit) {
             ) {
                 MainActivityDataModel.centroids.forEach { color ->
                     AnimatedContent(color) {
-                        ColorButton(it)
+                        ColorCircle(it)
                     }
                 }
             }

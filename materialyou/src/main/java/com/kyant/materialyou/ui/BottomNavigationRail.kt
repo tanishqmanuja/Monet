@@ -40,11 +40,12 @@ fun BottomNavigationRail(
                 .vibrate(VibrationEffect.createPredefined(VibrationEffect.EFFECT_TICK))
         }
     }
+    val backgroundColor = LocalMonetColors.current.neutral2[1]
     Card(
         modifier.height(80.dp),
         shape = RoundedCornerShape(0.dp),
-        backgroundColor = LocalMonetColors.current.neutral1[1],
-        contentColor = LocalMonetColors.current.neutral1[1].contentColor()
+        backgroundColor = backgroundColor,
+        contentColor = backgroundColor.contentColor()
     ) {
         Row(
             Modifier.fillMaxSize(),
@@ -67,10 +68,8 @@ fun BottomNavigationRail(
                         label,
                         Modifier
                             .background(
-                                animateColorAsState(
-                                    if (selected) LocalMonetColors.current.accent1[2]
-                                    else LocalMonetColors.current.neutral1[1]
-                                ).value, CircleShape
+                                animateColorAsState(if (selected) LocalMonetColors.current.accent1[2] else backgroundColor).value,
+                                CircleShape
                             )
                             .padding(animateDpAsState(if (selected) 16.dp else 4.dp).value, 4.dp)
                     )

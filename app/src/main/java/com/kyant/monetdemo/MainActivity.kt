@@ -71,13 +71,13 @@ fun Content(startForImageResult: ActivityResultLauncher<Intent>) {
     MonetTheme(color) {
         val colors = LocalMonetColors.current
         SideEffect {
-            systemUiController.setSystemBarsColor(colors.neutral1[0])
-            systemUiController.setNavigationBarColor(colors.neutral1[1])
+            systemUiController.setSystemBarsColor(colors.neutral1[1])
+            systemUiController.setNavigationBarColor(colors.neutral2[1])
         }
 
         Surface(
             Modifier.fillMaxSize(),
-            color = colors.neutral1[0]
+            color = colors.neutral1[1]
         ) {
             Box {
                 var screen by remember { mutableStateOf(0) }
