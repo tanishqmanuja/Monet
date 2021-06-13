@@ -2,10 +2,20 @@
 
 Google's Monet color system (Android 12 Beta 2) library.
 
-## Usages
+## Usage
 
-To generate Monet color palette please use
+### Jetpack Compose
+
+1. Generate Monet color palette
 
 ```kotlin
-monetColors(int, darkTheme)
+monetColorsOf(Color, darkTheme)
+```
+
+2. LocalMonetColors
+
+```kotlin
+ProvideMonetColors(Color, darkTheme) {
+    // content
+}
 ```
