@@ -35,7 +35,8 @@ import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.kyant.materialyou.ui.BottomNavigationRail
 import com.kyant.monet.LocalMonetColors
-import com.kyant.monet.colorCentroidsOf
+import com.kyant.monet.cam16Centroids
+import com.kyant.monet.rgbCentroids
 import com.kyant.monetdemo.ui.screen.Generator
 import com.kyant.monetdemo.ui.screen.Palette
 import com.kyant.monetdemo.ui.screen.Settings
@@ -47,7 +48,9 @@ import kotlinx.coroutines.withContext
 
 object MainActivityDataModel {
     val imageUri: MutableState<Uri?> = mutableStateOf(null)
-    var centroids by mutableStateOf<List<Color>>(emptyList())
+    var k by mutableStateOf(4)
+    var rgbCentroids by mutableStateOf<List<Color>>(emptyList())
+    var cam16Centroids by mutableStateOf<List<Color>>(emptyList())
 }
 
 class MainActivity : ComponentActivity() {
@@ -63,25 +66,33 @@ class MainActivity : ComponentActivity() {
             }
 
         setContent {
-            MainActivityDataModel.imageUri.value?.let {
-                LaunchedEffect(it) {
-                    withContext(Dispatchers.IO) {
-                        MainActivityDataModel.centroids = emptyList()
-                        val colors = mutableListOf<Color>()
-                        val loader = ImageLoader(this@MainActivity)
-                        val request = ImageRequest.Builder(this@MainActivity)
-                            .data(it)
-                            .allowHardware(false)
-                            .build()
-                        val result = (loader.execute(request) as SuccessResult).drawable
-                        val bitmap = (result as BitmapDrawable).bitmap
-                        val scaledBitmap = bitmap.scale(200, 200)
-                        for (i in 0 until scaledBitmap.width) {
-                            for (j in 0 until scaledBitmap.height) {
-                                colors.add(Color(scaledBitmap[i, j]))
+            with(MainActivityDataModel) {
+                imageUri.value?.let {
+                    LaunchedEffect(it) {
+                        withContext(Dispatchers.IO) {
+                            rgbCentroids = emptyList()
+                            cam16Centroids = emptyList()
+                            val colors = mutableListOf<Color>()
+                            val loader = ImageLoader(this@MainActivity)
+                            val request = ImageRequest.Builder(this@MainActivity)
+                                .data(it)
+                                .allowHardware(false)
+                                .build()
+                            val result = (loader.execute(request) as SuccessResult).drawable
+                            val bitmap = (result as BitmapDrawable).bitmap
+                            val scaledBitmap = bitmap.scale(200, 200)
+                            for (i in 0 until scaledBitmap.width) {
+                                for (j in 0 until scaledBitmap.height) {
+                                    colors.add(Color(scaledBitmap[i, j]))
+                                }
+                            }
+                            CoroutineScope(Dispatchers.IO).launch {
+                                rgbCentroids = colors.rgbCentroids(k)
+                            }
+                            CoroutineScope(Dispatchers.IO).launch {
+                                cam16Centroids = colors.cam16Centroids(k)
                             }
                         }
-                        MainActivityDataModel.centroids = colors.colorCentroidsOf(8)
                     }
                 }
             }

@@ -71,7 +71,7 @@ fun Generator(onPickButtonClick: () -> Unit) {
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Icon(
-                                Icons.Outlined.Photo, "Photo",
+                                Icons.Outlined.Photo, null,
                                 tint = LocalMonetColors.current.accent3[0]
                             )
                             Spacer(Modifier.width(16.dp))
@@ -102,12 +102,12 @@ fun Generator(onPickButtonClick: () -> Unit) {
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Icon(
-                                Icons.Outlined.BubbleChart, "k",
+                                Icons.Outlined.BubbleChart, null,
                                 tint = LocalMonetColors.current.accent1[0]
                             )
                             Spacer(Modifier.width(16.dp))
                             Text(
-                                "k = 8",
+                                "k = ${MainActivityDataModel.k}",
                                 color = LocalMonetColors.current.accent1[0],
                                 style = MaterialTheme.typography.h6
                             )
@@ -117,13 +117,34 @@ fun Generator(onPickButtonClick: () -> Unit) {
             }
         }
 
+        Text(
+            "RGB",
+            Modifier.padding(16.dp, 32.dp),
+            fontWeight = FontWeight.Normal,
+            style = MaterialTheme.typography.h5
+        )
         FlowRow(
-            Modifier
-                .fillMaxWidth()
-                .padding(vertical = 48.dp),
+            Modifier.fillMaxWidth(),
             mainAxisAlignment = MainAxisAlignment.Center
         ) {
-            MainActivityDataModel.centroids.forEach { color ->
+            MainActivityDataModel.rgbCentroids.forEach { color ->
+                AnimatedContent(color) {
+                    ColorCircle(it)
+                }
+            }
+        }
+
+        Text(
+            "CAM16",
+            Modifier.padding(16.dp, 32.dp),
+            fontWeight = FontWeight.Normal,
+            style = MaterialTheme.typography.h5
+        )
+        FlowRow(
+            Modifier.fillMaxWidth(),
+            mainAxisAlignment = MainAxisAlignment.Center
+        ) {
+            MainActivityDataModel.cam16Centroids.forEach { color ->
                 AnimatedContent(color) {
                     ColorCircle(it)
                 }
