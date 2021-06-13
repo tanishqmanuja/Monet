@@ -21,14 +21,14 @@ import com.kyant.monet.LocalMonetColors
 @Composable
 fun Settings() {
     StretchScrollableColumn(Modifier.fillMaxSize()) {
-        Spacer(Modifier.height(56.dp))
+        Spacer(Modifier.height(112.dp))
         Text(
             "Settings",
             Modifier.padding(horizontal = 24.dp),
             fontWeight = FontWeight.Medium,
             style = MaterialTheme.typography.h4
         )
-        Spacer(Modifier.height(56.dp))
+        Spacer(Modifier.height(48.dp))
         SelectorTile(
             "Monet impl.",
             Icons.Outlined.Landscape,

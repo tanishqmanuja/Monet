@@ -2,6 +2,7 @@ package com.kyant.monetdemo
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -25,10 +26,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
+import androidx.core.graphics.get
+import androidx.core.graphics.scale
+import coil.ImageLoader
+import coil.request.ImageRequest
+import coil.request.SuccessResult
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.kyant.materialyou.ui.BottomNavigationRail
 import com.kyant.monet.LocalMonetColors
+import com.kyant.monet.colorCentroidsOf
 import com.kyant.monetdemo.ui.screen.Generator
 import com.kyant.monetdemo.ui.screen.Palette
 import com.kyant.monetdemo.ui.screen.Settings
@@ -36,6 +43,7 @@ import com.kyant.monetdemo.ui.theme.MonetTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 object MainActivityDataModel {
     val imageUri: MutableState<Uri?> = mutableStateOf(null)
@@ -55,6 +63,28 @@ class MainActivity : ComponentActivity() {
             }
 
         setContent {
+            MainActivityDataModel.imageUri.value?.let {
+                LaunchedEffect(it) {
+                    withContext(Dispatchers.IO) {
+                        MainActivityDataModel.centroids = emptyList()
+                        val colors = mutableListOf<Color>()
+                        val loader = ImageLoader(this@MainActivity)
+                        val request = ImageRequest.Builder(this@MainActivity)
+                            .data(it)
+                            .allowHardware(false)
+                            .build()
+                        val result = (loader.execute(request) as SuccessResult).drawable
+                        val bitmap = (result as BitmapDrawable).bitmap
+                        val scaledBitmap = bitmap.scale(200, 200)
+                        for (i in 0 until scaledBitmap.width) {
+                            for (j in 0 until scaledBitmap.height) {
+                                colors.add(Color(scaledBitmap[i, j]))
+                            }
+                        }
+                        MainActivityDataModel.centroids = colors.colorCentroidsOf(8)
+                    }
+                }
+            }
             Content(startForImageResult)
         }
     }

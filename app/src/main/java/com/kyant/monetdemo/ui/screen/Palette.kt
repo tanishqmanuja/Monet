@@ -43,7 +43,7 @@ fun Palette(
 ) {
     val (a1, a2, a3, n1, n2) = colors
     StretchScrollableColumn(Modifier.fillMaxSize()) {
-        Spacer(Modifier.height(56.dp))
+        Spacer(Modifier.height(112.dp))
         Text(
             "Monet Palette",
             Modifier.padding(horizontal = 24.dp),
