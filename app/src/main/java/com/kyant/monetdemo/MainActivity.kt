@@ -48,7 +48,7 @@ import kotlinx.coroutines.withContext
 
 object MainActivityDataModel {
     val imageUri: MutableState<Uri?> = mutableStateOf(null)
-    var k by mutableStateOf(4)
+    var k by mutableStateOf(3)
     var rgbCentroids by mutableStateOf<List<Color>>(emptyList())
     var cam16Centroids by mutableStateOf<List<Color>>(emptyList())
 }

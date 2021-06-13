@@ -47,7 +47,7 @@ fun Settings() {
             "Clustering",
             Icons.Outlined.BubbleChart,
             LocalMonetColors.current.accent1[2],
-            "KMeans (Smile ML)",
+            "KMeans (Smile)",
             LocalMonetColors.current.accent3[2]
         ) { }
         Spacer(Modifier.height(24.dp))
