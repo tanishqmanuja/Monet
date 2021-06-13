@@ -72,7 +72,7 @@ fun Content(startForImageResult: ActivityResultLauncher<Intent>) {
         val colors = LocalMonetColors.current
         SideEffect {
             systemUiController.setSystemBarsColor(colors.neutral1[1])
-            systemUiController.setNavigationBarColor(colors.neutral2[1])
+            systemUiController.setNavigationBarColor(colors.accent1[0])
         }
 
         Surface(

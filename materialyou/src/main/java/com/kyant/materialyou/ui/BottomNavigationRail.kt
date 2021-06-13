@@ -40,7 +40,7 @@ fun BottomNavigationRail(
                 .vibrate(VibrationEffect.createPredefined(VibrationEffect.EFFECT_TICK))
         }
     }
-    val backgroundColor = LocalMonetColors.current.neutral2[1]
+    val backgroundColor = LocalMonetColors.current.accent1[0]
     Card(
         modifier.height(80.dp),
         shape = RoundedCornerShape(0.dp),
