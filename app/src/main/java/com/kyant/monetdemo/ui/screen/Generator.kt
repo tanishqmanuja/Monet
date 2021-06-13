@@ -30,8 +30,6 @@ import com.kyant.monetdemo.MainActivityDataModel
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun Generator(onPickButtonClick: () -> Unit) {
-    val uri = MainActivityDataModel.imageUri.value
-
     StretchScrollableColumn(Modifier.fillMaxSize()) {
         Spacer(Modifier.height(112.dp))
         Text(
@@ -46,7 +44,7 @@ fun Generator(onPickButtonClick: () -> Unit) {
             Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            AnimatedContent(uri) {
+            AnimatedContent(MainActivityDataModel.imageUri.value) {
                 Image(
                     rememberCoilPainter(it), null,
                     Modifier
