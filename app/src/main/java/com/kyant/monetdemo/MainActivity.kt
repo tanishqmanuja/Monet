@@ -68,7 +68,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             with(MainActivityDataModel) {
                 imageUri.value?.let {
-                    LaunchedEffect(it) {
+                    LaunchedEffect(it, k) {
                         withContext(Dispatchers.IO) {
                             rgbCentroids = emptyList()
                             cam16Centroids = emptyList()
