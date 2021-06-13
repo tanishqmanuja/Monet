@@ -53,8 +53,7 @@ fun Palette(
         Box {
             ColorTextField(text, onValueChange)
             Icon(
-                Icons.Outlined.Palette,
-                "Pick a color",
+                Icons.Outlined.Palette, "Pick a color",
                 Modifier
                     .padding(end = 20.dp)
                     .clip(CircleShape)
