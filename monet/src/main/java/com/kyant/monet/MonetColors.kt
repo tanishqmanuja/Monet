@@ -3,7 +3,7 @@ package com.kyant.monet
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
-import com.kyant.monet.ColorScheme
+import com.kyant.monet.nativemonet.ColorScheme
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
