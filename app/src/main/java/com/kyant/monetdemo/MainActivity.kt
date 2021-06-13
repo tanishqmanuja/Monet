@@ -27,8 +27,8 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import com.kyant.materialyou.component.BottomNavigationRail
-import com.kyant.monetdemo.color.LocalMonetColors
+import com.kyant.materialyou.ui.BottomNavigationRail
+import com.kyant.monet.LocalMonetColors
 import com.kyant.monetdemo.ui.screen.Generator
 import com.kyant.monetdemo.ui.screen.Palette
 import com.kyant.monetdemo.ui.screen.Settings

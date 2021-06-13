@@ -11,7 +11,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.kyant.monetdemo.R
-import com.kyant.monetdemo.color.ProvideMonetColors
+import com.kyant.monet.ProvideMonetColors
 
 @Composable
 fun MonetTheme(

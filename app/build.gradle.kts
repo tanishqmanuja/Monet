@@ -47,6 +47,7 @@ android {
 dependencies {
     val compose = "1.0.0-SNAPSHOT"
     val accompanist = "0.12.0-SNAPSHOT"
+    implementation(project(":materialyou"))
     implementation(project(":monet"))
     implementation("androidx.activity:activity-compose:1.3.0-SNAPSHOT")
     implementation("androidx.appcompat:appcompat:1.4.0-alpha02")
@@ -59,7 +60,6 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0-SNAPSHOT")
     implementation("androidx.navigation:navigation-compose:2.4.0-SNAPSHOT")
     implementation("com.github.dhaval2404:imagepicker:2.1")
-    implementation("com.github.haifengl:smile-kotlin:2.6.0")
     implementation("com.google.accompanist:accompanist-coil:$accompanist")
     implementation("com.google.accompanist:accompanist-flowlayout:$accompanist")
     implementation("com.google.accompanist:accompanist-insets:$accompanist")

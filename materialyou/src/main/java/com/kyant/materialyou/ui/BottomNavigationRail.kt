@@ -1,4 +1,4 @@
-package com.kyant.materialyou.component
+package com.kyant.materialyou.ui
 
 import android.content.Context.VIBRATOR_SERVICE
 import android.os.Build
@@ -23,8 +23,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.kyant.monetdemo.color.LocalMonetColors
-import com.kyant.monetdemo.ui.util.contentColor
+import com.kyant.monet.LocalMonetColors
+import com.kyant.monet.contentColor
 
 @Composable
 fun BottomNavigationRail(

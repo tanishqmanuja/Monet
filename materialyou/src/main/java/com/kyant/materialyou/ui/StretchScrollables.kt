@@ -1,4 +1,4 @@
-package com.kyant.materialyou.component
+package com.kyant.materialyou.ui
 
 import android.os.Build
 import android.widget.ScrollView

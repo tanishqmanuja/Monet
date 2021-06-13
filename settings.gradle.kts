@@ -1,2 +1,2 @@
 rootProject.name = "Monet"
-include(":app", ":monet")
+include(":app", ":monet", ":materialyou")

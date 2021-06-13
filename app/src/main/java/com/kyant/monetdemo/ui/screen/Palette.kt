@@ -30,10 +30,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.flowlayout.FlowRow
 import com.google.accompanist.flowlayout.MainAxisAlignment
-import com.kyant.materialyou.component.StretchScrollableColumn
-import com.kyant.monetdemo.color.LocalMonetColors
-import com.kyant.monetdemo.color.MonetColors
-import com.kyant.monetdemo.ui.util.contentColor
+import com.kyant.materialyou.ui.StretchScrollableColumn
+import com.kyant.monet.LocalMonetColors
+import com.kyant.monet.MonetColors
+import com.kyant.monet.contentColor
 
 @Composable
 fun Palette(

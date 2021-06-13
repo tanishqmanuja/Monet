@@ -1,4 +1,4 @@
-package com.kyant.materialyou.component
+package com.kyant.materialyou.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -14,10 +14,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.kyant.monetdemo.ui.util.contentColor
+import com.kyant.monet.contentColor
 
 @Composable
-fun Selector(
+fun SelectorTile(
     text: String,
     icon: ImageVector,
     tint: Color,

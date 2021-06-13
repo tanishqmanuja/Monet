@@ -1,4 +1,4 @@
-package com.kyant.monetdemo.ui.util
+package com.kyant.monet
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.luminance

@@ -14,9 +14,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.kyant.materialyou.component.Selector
-import com.kyant.materialyou.component.StretchScrollableColumn
-import com.kyant.monetdemo.color.LocalMonetColors
+import com.kyant.materialyou.ui.SelectorTile
+import com.kyant.materialyou.ui.StretchScrollableColumn
+import com.kyant.monet.LocalMonetColors
 
 @Composable
 fun Settings() {
@@ -29,21 +29,21 @@ fun Settings() {
             style = MaterialTheme.typography.h4
         )
         Spacer(Modifier.height(56.dp))
-        Selector(
+        SelectorTile(
             "Monet impl.",
             Icons.Outlined.Landscape,
             LocalMonetColors.current.accent1[2],
             "A12 Beta 2",
             LocalMonetColors.current.accent3[2]
         ) { }
-        Selector(
+        SelectorTile(
             "Precision level",
             Icons.Outlined.Stars,
             LocalMonetColors.current.accent1[2],
             "Common",
             LocalMonetColors.current.accent3[1]
         ) { }
-        Selector(
+        SelectorTile(
             "Clustering",
             Icons.Outlined.BubbleChart,
             LocalMonetColors.current.accent1[2],
