@@ -2,7 +2,7 @@ package com.kyant.monet
 
 import com.kyant.monet.nativecolor.ColorUtils
 
-object Shades {
+internal object Shades {
     fun of(hue: Double, chroma: Double): List<Int> {
         val iArr = IntArray(12)
         iArr[0] = ColorUtils.CAMToColor(hue, chroma, 99.0)
