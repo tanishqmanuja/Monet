@@ -129,7 +129,7 @@ fun Generator(onPickButtonClick: () -> Unit) {
         ) {
             MainActivityDataModel.rgbCentroids.forEach { color ->
                 AnimatedContent(color) {
-                    ColorCircle(it)
+                    ColorCell(it)
                 }
             }
         }
@@ -146,7 +146,7 @@ fun Generator(onPickButtonClick: () -> Unit) {
         ) {
             MainActivityDataModel.cam16Centroids.forEach { color ->
                 AnimatedContent(color) {
-                    ColorCircle(it)
+                    ColorCell(it)
                 }
             }
         }
