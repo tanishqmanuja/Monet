@@ -9,9 +9,10 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Palette
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
+import androidx.compose.material.TextField
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -45,21 +46,7 @@ fun Palette(
             fontWeight = FontWeight.Medium,
             style = MaterialTheme.typography.h4
         )
-        Box {
-            ColorTextField(text, onValueChange)
-            Icon(
-                Icons.Outlined.Palette, "Pick a color",
-                Modifier
-                    .padding(end = 20.dp)
-                    .clip(CircleShape)
-                    .clickable { }
-                    .background(LocalMonetColors.current.accent1[5])
-                    .padding(16.dp)
-                    .align(Alignment.CenterEnd),
-                tint = LocalMonetColors.current.accent1[5].contentColor()
-            )
-        }
-        Spacer(Modifier.height(24.dp))
+        ColorTextField(text, onValueChange)
         ColorSchemePalette(
             "A-1" to a1,
             "A-2" to a2,
@@ -98,7 +85,7 @@ fun ColorTextField(text: TextFieldValue, onValueChange: (TextFieldValue) -> Unit
             softwareKeyboardController?.hide()
         }),
         singleLine = true,
-        shape = CircleShape,
+        shape = RoundedCornerShape(16.dp),
         colors = TextFieldDefaults.textFieldColors(
             textColor = LocalMonetColors.current.accent1[5],
             backgroundColor = LocalMonetColors.current.neutral1[0],
@@ -114,7 +101,7 @@ fun ColorSchemePalette(vararg shades: Pair<String, List<Color>>) {
     Column(
         Modifier
             .padding(4.dp)
-            .background(LocalMonetColors.current.neutral1[0])
+            .background(LocalMonetColors.current.neutral1[0], RoundedCornerShape(8.dp))
             .horizontalScroll(rememberScrollState())
     ) {
         Row(Modifier.padding(40.dp, 16.dp)) {
@@ -139,14 +126,8 @@ fun ColorSchemePalette(vararg shades: Pair<String, List<Color>>) {
             }
         }
         shades.forEach { (name, shade) ->
-            Column(
-                Modifier
-                    .padding(horizontal = 16.dp)
-            ) {
-                Row(
-                    Modifier.padding(vertical = 4.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
+            Column(Modifier.padding(horizontal = 16.dp)) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
                         name,
                         fontWeight = FontWeight.Medium,
