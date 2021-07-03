@@ -38,20 +38,20 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.0.0-SNAPSHOT"
+        kotlinCompilerExtensionVersion = "1.1.0-SNAPSHOT"
     }
 }
 
 dependencies {
-    val compose = "1.0.0-SNAPSHOT"
-    val accompanist = "0.12.0-SNAPSHOT"
+    val compose = "1.1.0-SNAPSHOT"
+    val accompanist = "0.14.0-SNAPSHOT"
     implementation(project(":monet"))
-    implementation("androidx.appcompat:appcompat:1.4.0-alpha02")
+    implementation("androidx.appcompat:appcompat:1.4.0-alpha03")
     implementation("androidx.compose.ui:ui:$compose")
     implementation("androidx.compose.material:material:$compose")
     implementation("androidx.compose.material:material-icons-extended:$compose")
     implementation("androidx.compose.ui:ui-tooling:$compose")
-    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.0-alpha07")
+    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.0-alpha08")
     implementation("androidx.core:core-ktx:1.7.0-SNAPSHOT")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0-SNAPSHOT")
     implementation("androidx.navigation:navigation-compose:2.4.0-SNAPSHOT")

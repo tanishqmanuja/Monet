@@ -38,13 +38,13 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.0.0-SNAPSHOT"
+        kotlinCompilerExtensionVersion = "1.1.0-SNAPSHOT"
     }
 }
 
 dependencies {
-    implementation("androidx.appcompat:appcompat:1.4.0-alpha02")
-    implementation("androidx.compose.ui:ui:1.0.0-SNAPSHOT")
+    implementation("androidx.appcompat:appcompat:1.4.0-alpha03")
+    implementation("androidx.compose.ui:ui:1.1.0-SNAPSHOT")
     implementation("androidx.core:core-ktx:1.7.0-SNAPSHOT")
     implementation("com.github.haifengl:smile-kotlin:2.6.0")
 }

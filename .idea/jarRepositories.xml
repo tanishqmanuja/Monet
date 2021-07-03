@@ -14,7 +14,7 @@
     <remote-repository>
       <option name="id" value="maven" />
       <option name="name" value="maven" />
-      <option name="url" value="https://androidx.dev/snapshots/builds/7447403/artifacts/repository" />
+      <option name="url" value="https://androidx.dev/snapshots/builds/7520472/artifacts/repository" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="maven2" />
@@ -35,21 +35,6 @@
       <option name="id" value="maven3" />
       <option name="name" value="maven3" />
       <option name="url" value="https://jitpack.io" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="maven4" />
-      <option name="name" value="maven4" />
-      <option name="url" value="https://maven.pkg.github.com/Kyant2021" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="maven4" />
-      <option name="name" value="maven4" />
-      <option name="url" value="https://maven.pkg.github.com" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="maven4" />
-      <option name="name" value="maven4" />
-      <option name="url" value="https://maven.pkg.github.com/Kyant2021/Monet" />
     </remote-repository>
   </component>
 </project>
