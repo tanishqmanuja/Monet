@@ -33,7 +33,7 @@ fun Settings() {
             "Monet impl.",
             Icons.Outlined.Landscape,
             LocalMonetColors.current.accent1[2],
-            "A12 Beta 2",
+            "A12 Beta 3",
             LocalMonetColors.current.accent3[2]
         ) { }
         SelectorTile(

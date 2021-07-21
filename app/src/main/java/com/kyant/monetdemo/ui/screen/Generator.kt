@@ -19,7 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.coil.rememberCoilPainter
+import coil.compose.rememberImagePainter
 import com.google.accompanist.flowlayout.FlowRow
 import com.google.accompanist.flowlayout.MainAxisAlignment
 import com.kyant.materialyou.ui.StretchScrollableColumn
@@ -46,7 +46,7 @@ fun Generator(onPickButtonClick: () -> Unit) {
         ) {
             AnimatedContent(MainActivityDataModel.imageUri.value) {
                 Image(
-                    rememberCoilPainter(it), null,
+                    rememberImagePainter(it), null,
                     Modifier
                         .padding(16.dp, 32.dp)
                         .width(128.dp)

@@ -100,8 +100,8 @@ fun ColorTextField(text: TextFieldValue, onValueChange: (TextFieldValue) -> Unit
 fun ColorSchemePalette(vararg shades: Pair<String, List<Color>>) {
     Column(
         Modifier
-            .padding(4.dp)
-            .background(LocalMonetColors.current.neutral1[0], RoundedCornerShape(8.dp))
+            .padding(8.dp)
+            .background(LocalMonetColors.current.neutral1[0], RoundedCornerShape(32.dp))
             .horizontalScroll(rememberScrollState())
     ) {
         Row(Modifier.padding(40.dp, 16.dp)) {
@@ -146,6 +146,7 @@ fun ColorSchemePalette(vararg shades: Pair<String, List<Color>>) {
                 }
             }
         }
+        Spacer(Modifier.height(16.dp))
     }
 }
 
