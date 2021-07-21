@@ -1,5 +1,6 @@
 package com.kyant.monetdemo.ui.screen
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
@@ -19,6 +20,7 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -26,10 +28,16 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.kyant.materialyou.ui.StretchScrollableColumn
 import com.kyant.monet.LocalMonetColors
 import com.kyant.monet.MonetColors
 import com.kyant.monet.contentColor
+
+fun colorToHex(x: Color): String {
+    val intColor = x.toArgb()
+    return java.lang.String.format("#%06X", 0xFFFFFF and intColor)
+}
 
 @Composable
 fun Palette(
@@ -38,6 +46,14 @@ fun Palette(
     onValueChange: (TextFieldValue) -> Unit
 ) {
     val (a1, a2, a3, n1, n2) = colors
+//    Log.d("COLORS-A1", a1.map{ colorToHex(it) }.toString())
+//    Log.d("COLORS-A2", a2.map{ colorToHex(it) }.toString())
+//    Log.d("COLORS-A3", a3.map{ colorToHex(it) }.toString())
+//    Log.d("COLORS-N1", n1.map{ colorToHex(it) }.toString())
+//    Log.d("COLORS-N2", n2.map{ colorToHex(it) }.toString())
+    val arr = arrayOf(a1,a2,a3,n1,n2).map { list -> list.map {colorToHex(it) } }
+    Log.d("COLORS", arr.toString())
+
     StretchScrollableColumn(Modifier.fillMaxSize()) {
         Spacer(Modifier.height(112.dp))
         Text(
@@ -141,7 +157,10 @@ fun ColorSchemePalette(vararg shades: Pair<String, List<Color>>) {
                                 .aspectRatio(1f)
                                 .clip(RoundedCornerShape(8.dp))
                                 .background(color)
-                        )
+
+                        ){
+                            Text(colorToHex(color), fontSize = 12.sp, textAlign = TextAlign.Center)
+                        }
                     }
                 }
             }
