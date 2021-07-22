@@ -10,6 +10,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
@@ -149,7 +150,7 @@ fun ColorSchemePalette(vararg shades: Pair<String, List<Color>>) {
                         fontWeight = FontWeight.Medium,
                         style = MaterialTheme.typography.body1
                     )
-                    (shade + Color.Black).forEach { color ->
+                    (shade + Color.Black).forEachIndexed { index, color ->
                         Box(
                             Modifier
                                 .padding(4.dp)
@@ -159,7 +160,13 @@ fun ColorSchemePalette(vararg shades: Pair<String, List<Color>>) {
                                 .background(color)
 
                         ){
-                            Text(colorToHex(color), fontSize = 12.sp, textAlign = TextAlign.Center)
+                            SelectionContainer {
+                                Text(colorToHex(color),
+                                    color = if(index>7) Color.White else Color.Black,
+                                    fontSize = 12.sp,
+                                    textAlign = TextAlign.Center
+                                )
+                            }
                         }
                     }
                 }
