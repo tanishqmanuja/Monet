@@ -1,6 +1,6 @@
 # Monet
 
-Google's Monet color system (Android 12 Beta 2) library.
+Google's Monet color system (Android 12 Beta 3) library.
 
 ## Usage
 
